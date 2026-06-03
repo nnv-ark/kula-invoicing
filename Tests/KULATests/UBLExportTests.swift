@@ -16,15 +16,15 @@ final class UBLExportTests: XCTestCase {
 
     private func sampleInvoice(_ context: ModelContext) -> (Invoice, AppSettings) {
         let company = AppSettings()
-        company.companyName = "NNV ehf."
-        company.companyNationalID = "4702221580"
-        company.companyVATNumber = "143820"
-        company.bankAccountNumber = "0133-26-005422"
-        company.companyEmail = "oli@nordnordvestur.com"
+        company.companyName = "Demó ehf."
+        company.companyNationalID = "1234567890"
+        company.companyVATNumber = "123456"
+        company.bankAccountNumber = "0000-11-222222"
+        company.companyEmail = "demo@example.is"
         context.insert(company)
 
-        let contact = Contact(name: "Jón", company: "koa arkitektar ehf.",
-                              nationalID: "6504220660", address: "Hnífsdalsvegi 10")
+        let contact = Contact(name: "Jón Jónsson", company: "Kaupandi ehf.",
+                              nationalID: "0101302129", address: "Götuheiti 1")
         context.insert(contact)
 
         let invoice = Invoice(number: "0000087", currencyCode: "ISK", taxRate: 24)
@@ -50,8 +50,8 @@ final class UBLExportTests: XCTestCase {
         XCTAssertTrue(xml.contains("urn:cen.eu:en16931:2017#compliant#urn:fdc:peppol.eu:2017:poacc:billing:3.0"))
         XCTAssertTrue(xml.contains("<cbc:ID>0000087</cbc:ID>"))
         XCTAssertTrue(xml.contains("<cbc:DocumentCurrencyCode>ISK</cbc:DocumentCurrencyCode>"))
-        XCTAssertTrue(xml.contains("NNV ehf."))
-        XCTAssertTrue(xml.contains("koa arkitektar ehf."))
+        XCTAssertTrue(xml.contains("Demó ehf."))
+        XCTAssertTrue(xml.contains("Kaupandi ehf."))
         XCTAssertTrue(xml.contains(#"schemeID="0196""#))
     }
 

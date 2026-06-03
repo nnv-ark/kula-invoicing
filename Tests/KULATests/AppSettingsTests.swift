@@ -79,7 +79,7 @@ final class AppSettingsTests: XCTestCase {
         XCTAssertEqual(c.displayName, "Ónefnt fyrirtæki")
         c.fullName = "Óli"
         XCTAssertEqual(c.displayName, "Óli")
-        c.companyName = "NNV ehf."
-        XCTAssertEqual(c.displayName, "NNV ehf.")
+        c.companyName = "Demó ehf."
+        XCTAssertEqual(c.displayName, "Demó ehf.")
     }
 }
