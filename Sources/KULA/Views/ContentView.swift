@@ -30,7 +30,10 @@ struct ContentView: View {
             }
             .navigationSplitViewColumnWidth(min: 200, ideal: 220)
             .safeAreaInset(edge: .top, spacing: 0) {
-                companySwitcher
+                VStack(spacing: 0) {
+                    brandHeader
+                    companySwitcher
+                }
             }
         } content: {
             if let company = activeCompany {
@@ -153,6 +156,23 @@ struct ContentView: View {
 
     private var activeCompany: AppSettings? {
         companies.first { $0.id.uuidString == activeCompanyID } ?? companies.first
+    }
+
+    /// App-vörumerki efst í hliðarstiku.
+    private var brandHeader: some View {
+        HStack(spacing: 8) {
+            Image("Logo")
+                .resizable()
+                .scaledToFill()
+                .frame(width: 26, height: 26)
+                .clipShape(RoundedRectangle(cornerRadius: 6, style: .continuous))
+            Text("KÚLA")
+                .font(.headline)
+            Spacer()
+        }
+        .padding(.horizontal, 12)
+        .padding(.top, 8)
+        .padding(.bottom, 2)
     }
 
     /// Native fyrirtækjaval efst í hliðarstiku — popup með haki á virku fyrirtæki.
