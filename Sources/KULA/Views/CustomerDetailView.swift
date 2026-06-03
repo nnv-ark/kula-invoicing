@@ -1,0 +1,169 @@
+import SwiftUI
+import SwiftData
+import Charts
+
+struct CustomerDetailView: View {
+    @Bindable var contact: Contact
+    var openInvoice: (Invoice) -> Void = { _ in }
+
+    private var currency: String { contact.owner?.defaultCurrencyCode ?? "ISK" }
+    private var invoices: [Invoice] { contact.invoices }
+
+    var body: some View {
+        Form {
+            Section("Mælaborð") {
+                kpiGrid
+                if !yearly.isEmpty {
+                    yearChart
+                        .frame(height: 160)
+                        .padding(.vertical, 4)
+                }
+            }
+
+            Section("Reikningar") {
+                if invoices.isEmpty {
+                    Text("Engir reikningar enn").foregroundStyle(.secondary)
+                }
+                ForEach(invoices.sorted { $0.createdAt > $1.createdAt }) { inv in
+                    Button { openInvoice(inv) } label: {
+                        HStack {
+                            Text(inv.number.isEmpty ? "(ekkert nr.)" : inv.number)
+                            Text(inv.issueDate.formatted(date: .numeric, time: .omitted))
+                                .font(.caption).foregroundStyle(.secondary)
+                            Spacer()
+                            Text(Money.format(inv.total, currencyCode: inv.currencyCode))
+                                .monospacedDigit()
+                            StatusBadge(status: inv.status)
+                            Image(systemName: "chevron.right")
+                                .font(.caption2).foregroundStyle(.tertiary)
+                        }
+                        .contentShape(Rectangle())
+                    }
+                    .buttonStyle(.plain)
+                }
+            }
+
+            Section("Viðskiptavinur") {
+                TextField("Nafn", text: $contact.name)
+                TextField("Fyrirtæki", text: $contact.company)
+                TextField("Kennitala", text: $contact.nationalID)
+                TextField("Netfang", text: $contact.email)
+                TextField("Sími", text: $contact.phone)
+                TextField("Heimilisfang", text: $contact.address, axis: .vertical)
+                    .lineLimit(2...5)
+            }
+
+            Section("Athugasemdir") {
+                TextEditor(text: $contact.notes)
+                    .frame(minHeight: 90)
+            }
+        }
+        .formStyle(.grouped)
+        .navigationTitle(contact.name.isEmpty ? "Viðskiptavinur" : contact.name)
+    }
+
+    // MARK: - KPI
+
+    private var kpiGrid: some View {
+        LazyVGrid(columns: [GridItem(.adaptive(minimum: 150), spacing: 12)], spacing: 12) {
+            kpi("Reikningar", "\(invoices.count)", "doc.text")
+            kpi("Heildarupphæð", Money.format(totalAll, currencyCode: currency), "sum")
+            kpi("Greitt", Money.format(paidTotal, currencyCode: currency), "checkmark.circle", .green)
+            kpi("Útistandandi", Money.format(outstanding, currencyCode: currency), "clock", outstanding > 0 ? .orange : .secondary)
+            kpi("Greiðsluhraði", avgPaymentText, "speedometer")
+            kpi("Gjaldfallið", "\(overdueCount)", "exclamationmark.triangle", overdueCount > 0 ? .red : .secondary)
+        }
+        .padding(.vertical, 4)
+    }
+
+    private func kpi(_ title: String, _ value: String, _ icon: String, _ tint: Color = .accentColor) -> some View {
+        VStack(alignment: .leading, spacing: 6) {
+            Label(title, systemImage: icon)
+                .font(.caption)
+                .foregroundStyle(.secondary)
+                .labelStyle(.titleAndIcon)
+            Text(value)
+                .font(.title3).bold()
+                .foregroundStyle(tint)
+                .monospacedDigit()
+                .lineLimit(1)
+                .minimumScaleFactor(0.6)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(12)
+        .background(.quaternary.opacity(0.4), in: RoundedRectangle(cornerRadius: 10))
+    }
+
+    // MARK: - Yearly chart
+
+    private var yearChart: some View {
+        Chart(yearly, id: \.year) { item in
+            BarMark(
+                x: .value("Ár", String(item.year)),
+                y: .value("Upphæð", item.totalDouble)
+            )
+            .foregroundStyle(.tint)
+            .annotation(position: .top) {
+                Text(Money.format(item.total, currencyCode: currency))
+                    .font(.caption2).foregroundStyle(.secondary)
+            }
+        }
+        .chartYAxis {
+            AxisMarks { value in
+                AxisGridLine()
+                AxisValueLabel {
+                    if let d = value.as(Double.self) {
+                        Text(compact(d))
+                    }
+                }
+            }
+        }
+    }
+
+    // MARK: - Metrics
+
+    private var totalAll: Decimal { invoices.reduce(0) { $0 + $1.total } }
+
+    private var paidTotal: Decimal {
+        invoices.filter { $0.status == .paid }.reduce(0) { $0 + $1.total }
+    }
+
+    private var outstanding: Decimal {
+        invoices.filter { $0.status != .paid && $0.status != .cancelled && $0.status != .refunded }
+            .reduce(0) { $0 + $1.total }
+    }
+
+    private var overdueCount: Int {
+        let now = Date()
+        return invoices.filter {
+            $0.status != .paid && $0.status != .cancelled && $0.status != .refunded
+                && ($0.dueDate.map { $0 < now } ?? false)
+        }.count
+    }
+
+    private var avgPaymentText: String {
+        let days = invoices.compactMap(\.paymentDays)
+        guard !days.isEmpty else { return "—" }
+        let avg = Double(days.reduce(0, +)) / Double(days.count)
+        return "\(Int(avg.rounded())) dagar"
+    }
+
+    private struct YearTotal { let year: Int; let total: Decimal; var totalDouble: Double { (total as NSDecimalNumber).doubleValue } }
+
+    private var yearly: [YearTotal] {
+        let cal = Calendar.current
+        let grouped = Dictionary(grouping: invoices) { cal.component(.year, from: $0.issueDate) }
+        return grouped
+            .map { YearTotal(year: $0.key, total: $0.value.reduce(0) { $0 + $1.total }) }
+            .sorted { $0.year < $1.year }
+    }
+
+    private func compact(_ d: Double) -> String {
+        let f = NumberFormatter()
+        f.numberStyle = .decimal
+        f.maximumFractionDigits = 0
+        if d >= 1_000_000 { return "\((d / 1_000_000).formatted(.number.precision(.fractionLength(0...1))))M" }
+        if d >= 1_000 { return "\(Int(d / 1_000))k" }
+        return f.string(from: d as NSNumber) ?? "\(Int(d))"
+    }
+}

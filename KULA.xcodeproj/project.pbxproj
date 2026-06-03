@@ -1,0 +1,459 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 60;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3000000000000000000000A1 /* KULAApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2000000000000000000000A1 /* KULAApp.swift */; };
+		3000000000000000000000B7 /* FocusedActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2000000000000000000000B7 /* FocusedActions.swift */; };
+		3000000000000000000000A2 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2000000000000000000000A2 /* AppSettings.swift */; };
+		3000000000000000000000A3 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2000000000000000000000A3 /* Contact.swift */; };
+		3000000000000000000000A4 /* Invoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2000000000000000000000A4 /* Invoice.swift */; };
+		3000000000000000000000A5 /* InvoiceStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2000000000000000000000A5 /* InvoiceStatus.swift */; };
+		3000000000000000000000A6 /* LineItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2000000000000000000000A6 /* LineItem.swift */; };
+		3000000000000000000000A7 /* Money.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2000000000000000000000A7 /* Money.swift */; };
+		3000000000000000000000A8 /* PDFRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2000000000000000000000A8 /* PDFRenderer.swift */; };
+		3000000000000000000000B6 /* UBLInvoiceExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2000000000000000000000B6 /* UBLInvoiceExporter.swift */; };
+		3000000000000000000000BC /* BatchExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2000000000000000000000BC /* BatchExporter.swift */; };
+		3000000000000000000000B8 /* ContactImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2000000000000000000000B8 /* ContactImporter.swift */; };
+		3000000000000000000000B9 /* ContactImportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2000000000000000000000B9 /* ContactImportView.swift */; };
+		3000000000000000000000BA /* CustomerDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2000000000000000000000BA /* CustomerDetailView.swift */; };
+		3000000000000000000000BB /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2000000000000000000000BB /* DashboardView.swift */; };
+		3000000000000000000000AA /* InvoiceTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2000000000000000000000AA /* InvoiceTemplate.swift */; };
+		3000000000000000000000AC /* ContactsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2000000000000000000000AC /* ContactsView.swift */; };
+		3000000000000000000000AD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2000000000000000000000AD /* ContentView.swift */; };
+		3000000000000000000000AE /* InvoiceDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2000000000000000000000AE /* InvoiceDetailView.swift */; };
+		3000000000000000000000AF /* InvoiceListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2000000000000000000000AF /* InvoiceListView.swift */; };
+		3000000000000000000000B0 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2000000000000000000000B0 /* SettingsView.swift */; };
+		3000000000000000000000B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2000000000000000000000B1 /* Assets.xcassets */; };
+		3000000000000000000000B4 /* CustomStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2000000000000000000000B4 /* CustomStatus.swift */; };
+		3000000000000000000000B5 /* IcelandicTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2000000000000000000000B5 /* IcelandicTemplate.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		2000000000000000000000A1 /* KULAApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KULAApp.swift; sourceTree = "<group>"; };
+		2000000000000000000000B7 /* FocusedActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusedActions.swift; sourceTree = "<group>"; };
+		2000000000000000000000A2 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
+		2000000000000000000000A3 /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
+		2000000000000000000000A4 /* Invoice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Invoice.swift; sourceTree = "<group>"; };
+		2000000000000000000000A5 /* InvoiceStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceStatus.swift; sourceTree = "<group>"; };
+		2000000000000000000000A6 /* LineItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineItem.swift; sourceTree = "<group>"; };
+		2000000000000000000000A7 /* Money.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Money.swift; sourceTree = "<group>"; };
+		2000000000000000000000A8 /* PDFRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFRenderer.swift; sourceTree = "<group>"; };
+		2000000000000000000000B6 /* UBLInvoiceExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UBLInvoiceExporter.swift; sourceTree = "<group>"; };
+		2000000000000000000000BC /* BatchExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatchExporter.swift; sourceTree = "<group>"; };
+		2000000000000000000000B8 /* ContactImporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactImporter.swift; sourceTree = "<group>"; };
+		2000000000000000000000B9 /* ContactImportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactImportView.swift; sourceTree = "<group>"; };
+		2000000000000000000000BA /* CustomerDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerDetailView.swift; sourceTree = "<group>"; };
+		2000000000000000000000BB /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
+		2000000000000000000000AA /* InvoiceTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceTemplate.swift; sourceTree = "<group>"; };
+		2000000000000000000000AC /* ContactsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsView.swift; sourceTree = "<group>"; };
+		2000000000000000000000AD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		2000000000000000000000AE /* InvoiceDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceDetailView.swift; sourceTree = "<group>"; };
+		2000000000000000000000AF /* InvoiceListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceListView.swift; sourceTree = "<group>"; };
+		2000000000000000000000B0 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		2000000000000000000000B1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2000000000000000000000B2 /* KULA.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = KULA.entitlements; sourceTree = "<group>"; };
+		2000000000000000000000B3 /* KULA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KULA.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2000000000000000000000B4 /* CustomStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomStatus.swift; sourceTree = "<group>"; };
+		2000000000000000000000B5 /* IcelandicTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IcelandicTemplate.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1000000000000000000000C2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1000000000000000000000D0 = {
+			isa = PBXGroup;
+			children = (
+				1000000000000000000000D2 /* App */,
+				1000000000000000000000D3 /* Sources */,
+				1000000000000000000000D1 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		1000000000000000000000D1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2000000000000000000000B3 /* KULA.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1000000000000000000000D2 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				2000000000000000000000B1 /* Assets.xcassets */,
+				2000000000000000000000B2 /* KULA.entitlements */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		1000000000000000000000D3 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				1000000000000000000000D4 /* KULA */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		1000000000000000000000D4 /* KULA */ = {
+			isa = PBXGroup;
+			children = (
+				2000000000000000000000A1 /* KULAApp.swift */,
+				2000000000000000000000B7 /* FocusedActions.swift */,
+				1000000000000000000000D5 /* Models */,
+				1000000000000000000000D6 /* Views */,
+				1000000000000000000000D7 /* Templates */,
+				1000000000000000000000D8 /* PDF */,
+				1000000000000000000000D9 /* Export */,
+				1000000000000000000000DA /* Import */,
+			);
+			path = KULA;
+			sourceTree = "<group>";
+		};
+		1000000000000000000000D5 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				2000000000000000000000A2 /* AppSettings.swift */,
+				2000000000000000000000B4 /* CustomStatus.swift */,
+				2000000000000000000000A3 /* Contact.swift */,
+				2000000000000000000000A4 /* Invoice.swift */,
+				2000000000000000000000A5 /* InvoiceStatus.swift */,
+				2000000000000000000000A6 /* LineItem.swift */,
+				2000000000000000000000A7 /* Money.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		1000000000000000000000D6 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2000000000000000000000AC /* ContactsView.swift */,
+				2000000000000000000000B9 /* ContactImportView.swift */,
+				2000000000000000000000BA /* CustomerDetailView.swift */,
+				2000000000000000000000BB /* DashboardView.swift */,
+				2000000000000000000000AD /* ContentView.swift */,
+				2000000000000000000000AE /* InvoiceDetailView.swift */,
+				2000000000000000000000AF /* InvoiceListView.swift */,
+				2000000000000000000000B0 /* SettingsView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		1000000000000000000000D7 /* Templates */ = {
+			isa = PBXGroup;
+			children = (
+				2000000000000000000000B5 /* IcelandicTemplate.swift */,
+				2000000000000000000000AA /* InvoiceTemplate.swift */,
+			);
+			path = Templates;
+			sourceTree = "<group>";
+		};
+		1000000000000000000000D8 /* PDF */ = {
+			isa = PBXGroup;
+			children = (
+				2000000000000000000000A8 /* PDFRenderer.swift */,
+			);
+			path = PDF;
+			sourceTree = "<group>";
+		};
+		1000000000000000000000D9 /* Export */ = {
+			isa = PBXGroup;
+			children = (
+				2000000000000000000000B6 /* UBLInvoiceExporter.swift */,
+				2000000000000000000000BC /* BatchExporter.swift */,
+			);
+			path = Export;
+			sourceTree = "<group>";
+		};
+		1000000000000000000000DA /* Import */ = {
+			isa = PBXGroup;
+			children = (
+				2000000000000000000000B8 /* ContactImporter.swift */,
+			);
+			path = Import;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1000000000000000000000E0 /* KULA */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1000000000000000000000F2 /* Build configuration list for PBXNativeTarget "KULA" */;
+			buildPhases = (
+				1000000000000000000000C1 /* Sources */,
+				1000000000000000000000C2 /* Frameworks */,
+				1000000000000000000000C3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = KULA;
+			productName = KULA;
+			productReference = 2000000000000000000000B3 /* KULA.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1000000000000000000000E1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1610;
+				LastUpgradeCheck = 2650;
+				TargetAttributes = {
+					1000000000000000000000E0 = {
+						CreatedOnToolsVersion = 16.0;
+					};
+				};
+			};
+			buildConfigurationList = 1000000000000000000000F1 /* Build configuration list for PBXProject "KULA" */;
+			compatibilityVersion = "Xcode 15.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 1000000000000000000000D0;
+			productRefGroup = 1000000000000000000000D1 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1000000000000000000000E0 /* KULA */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1000000000000000000000C3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3000000000000000000000B1 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1000000000000000000000C1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3000000000000000000000A1 /* KULAApp.swift in Sources */,
+				3000000000000000000000B7 /* FocusedActions.swift in Sources */,
+				3000000000000000000000A2 /* AppSettings.swift in Sources */,
+				3000000000000000000000B4 /* CustomStatus.swift in Sources */,
+				3000000000000000000000A3 /* Contact.swift in Sources */,
+				3000000000000000000000A4 /* Invoice.swift in Sources */,
+				3000000000000000000000A5 /* InvoiceStatus.swift in Sources */,
+				3000000000000000000000A6 /* LineItem.swift in Sources */,
+				3000000000000000000000A7 /* Money.swift in Sources */,
+				3000000000000000000000A8 /* PDFRenderer.swift in Sources */,
+				3000000000000000000000B6 /* UBLInvoiceExporter.swift in Sources */,
+				3000000000000000000000BC /* BatchExporter.swift in Sources */,
+				3000000000000000000000B8 /* ContactImporter.swift in Sources */,
+				3000000000000000000000B9 /* ContactImportView.swift in Sources */,
+				3000000000000000000000BA /* CustomerDetailView.swift in Sources */,
+				3000000000000000000000BB /* DashboardView.swift in Sources */,
+				3000000000000000000000B5 /* IcelandicTemplate.swift in Sources */,
+				3000000000000000000000AA /* InvoiceTemplate.swift in Sources */,
+				3000000000000000000000AC /* ContactsView.swift in Sources */,
+				3000000000000000000000AD /* ContentView.swift in Sources */,
+				3000000000000000000000AE /* InvoiceDetailView.swift in Sources */,
+				3000000000000000000000AF /* InvoiceListView.swift in Sources */,
+				3000000000000000000000B0 /* SettingsView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1000000000000000000000F3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+		1000000000000000000000F4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				SDKROOT = macosx;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+		1000000000000000000000F5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = App/KULA.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "KÚLA";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.business";
+				INFOPLIST_KEY_NSContactsUsageDescription = "KÚLA notar Tengiliði til að flytja inn viðskiptavini.";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = is.calmail.kula;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+		1000000000000000000000F6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = App/KULA.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "KÚLA";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.business";
+				INFOPLIST_KEY_NSContactsUsageDescription = "KÚLA notar Tengiliði til að flytja inn viðskiptavini.";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = is.calmail.kula;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1000000000000000000000F1 /* Build configuration list for PBXProject "KULA" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1000000000000000000000F3 /* Debug */,
+				1000000000000000000000F4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1000000000000000000000F2 /* Build configuration list for PBXNativeTarget "KULA" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1000000000000000000000F5 /* Debug */,
+				1000000000000000000000F6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 1000000000000000000000E1 /* Project object */;
+}
