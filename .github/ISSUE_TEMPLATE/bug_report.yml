@@ -1,0 +1,35 @@
+name: Bug report
+description: Report something that isn't working correctly
+labels: ["bug"]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: A clear description of the bug and what you expected instead.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Go to …
+        2. Click …
+        3. See …
+    validations:
+      required: true
+  - type: input
+    id: macos
+    attributes:
+      label: macOS version
+      placeholder: "e.g. 14.5 (Sonoma)"
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: KÚLA version / commit
+      placeholder: "e.g. main @ 35aac1c"
+    validations:
+      required: false
