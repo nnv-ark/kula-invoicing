@@ -6,6 +6,7 @@
 </p>
 
 <p align="center">
+  <a href="https://github.com/nnv-ark/kula-invoicing/actions/workflows/ci.yml"><img src="https://github.com/nnv-ark/kula-invoicing/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
   <img src="https://img.shields.io/badge/platform-macOS%2014%2B-blue.svg" alt="macOS 14+">
   <img src="https://img.shields.io/badge/Swift-6.0-orange.svg" alt="Swift 6">
   <img src="https://img.shields.io/badge/license-MIT-green.svg" alt="MIT">
@@ -17,6 +18,8 @@ KÚLA is a focused, offline-first invoicing app. Your financial data stays on yo
 (SwiftData / local store) — no accounts, no cloud, no tracking. The invoice layout follows
 the standard Icelandic format, and invoices can be exported as **PDF** or as a
 **TS-136 / PEPPOL BIS Billing 3.0** electronic invoice (UBL 2.1 XML).
+
+![KÚLA dashboard](docs/dashboard.png)
 
 ## Features
 
