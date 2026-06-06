@@ -157,7 +157,7 @@ struct InvoiceDetailView: View {
             Section("Leiðréttingar") {
                 HStack {
                     TextField("Afsláttur", value: $invoice.discountAmount, format: .number)
-                    Toggle("%", isOn: $invoice.discountIsPercent).toggleStyle(.button)
+                    Text("%")
                 }
                 HStack {
                     TextField("Sjálfgefið VSK% fyrir nýjar línur", value: $invoice.taxRate, format: .number)

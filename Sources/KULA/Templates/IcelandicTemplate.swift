@@ -72,19 +72,28 @@ struct IcelandicTemplate: View {
         HStack(alignment: .top) {
             VStack(alignment: .leading, spacing: 4) {
                 if let data = settings.logoData, let img = NSImage(data: data) {
-                    Image(nsImage: img)
-                        .resizable().scaledToFit()
-                        .frame(maxWidth: 140 * settings.logoScale,
-                               maxHeight: 60 * settings.logoScale,
-                               alignment: .leading)
+                    // Lógó með stuttum texta miðjusettum undir því.
+                    VStack(alignment: .center, spacing: 4) {
+                        Image(nsImage: img)
+                            .resizable().scaledToFit()
+                            .frame(maxWidth: 140 * settings.logoScale,
+                                   maxHeight: 60 * settings.logoScale)
+                        if !settings.companyTagline.isEmpty {
+                            Text(settings.companyTagline)
+                                .font(.system(size: 8))
+                                .foregroundStyle(.secondary)
+                                .multilineTextAlignment(.center)
+                        }
+                    }
+                    .frame(width: 140 * settings.logoScale)
                 } else {
                     Text(settings.companyName.isEmpty ? "FYRIRTÆKI" : settings.companyName.uppercased())
                         .font(font(settings.headingFontSize, weight: .black))
-                }
-                if !settings.companyTagline.isEmpty {
-                    Text(settings.companyTagline)
-                        .font(.system(size: 8))
-                        .foregroundStyle(.secondary)
+                    if !settings.companyTagline.isEmpty {
+                        Text(settings.companyTagline)
+                            .font(.system(size: 8))
+                            .foregroundStyle(.secondary)
+                    }
                 }
             }
             Spacer()
@@ -209,11 +218,19 @@ struct IcelandicTemplate: View {
             Spacer()
             VStack(alignment: .trailing, spacing: 5) {
                 tRow("Samtals án VSK", currency(invoice.subtotal))
+                if invoice.discountValue > 0 {
+                    tRow(discountLabel, "-" + currency(invoice.discountValue))
+                    tRow("Skattstofn", currency(invoice.taxableBase))
+                }
                 tRow("VSK", currency(invoice.taxValue))
                 tRow("Samtals með VSK", currency(invoice.total), bold: true)
             }
             .frame(width: 260)
         }
+    }
+
+    private var discountLabel: String {
+        "Afsláttur (\(amount(invoice.discountAmount))%)"
     }
 
     private func tRow(_ label: String, _ value: String, bold: Bool = false) -> some View {

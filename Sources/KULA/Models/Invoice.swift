@@ -10,8 +10,7 @@ final class Invoice {
     var currencyCode: String = "ISK"
     var taxRate: Decimal = 24         // sjálfgefið VSK fyrir nýjar línur
     var isTaxInclusive: Bool = false
-    var discountAmount: Decimal = 0
-    var discountIsPercent: Bool = false
+    var discountAmount: Decimal = 0        // afsláttur, alltaf í prósentum (%)
     var note: String = ""
     var statusRaw: String = InvoiceStatus.draft.rawValue
     var createdAt: Date = Date()
@@ -92,27 +91,34 @@ final class Invoice {
         lineItems.reduce(0) { $0 + $1.subtotal }
     }
 
-    var discountValue: Decimal {
-        discountIsPercent ? (subtotal * discountAmount / 100) : discountAmount
-    }
+    /// Afsláttur (prósenta af undirsamtölu) dreifist hlutfallslega á allar VSK-línur.
+    var discountValue: Decimal { subtotal * discountAmount / 100 }
 
-    var taxableBase: Decimal { subtotal - discountValue }
+    /// Hlutfall verðs sem stendur eftir afslátt (1.0 = enginn afsláttur).
+    var discountFactor: Decimal { 1 - discountAmount / 100 }
 
-    var taxValue: Decimal {                                  // heildar VSK (summa per-línu)
-        lineItems.reduce(0) { $0 + $1.taxAmount }
+    var taxableBase: Decimal { subtotal - discountValue }   // skattstofn eftir afslátt
+
+    var taxValue: Decimal {                                  // heildar VSK á afsláttargrunni
+        vatBreakdown.reduce(0) { $0 + $1.tax }
     }
 
     var total: Decimal { taxableBase + taxValue }            // samtals með VSK
 
-    /// Sundurliðun VSK eftir hlutfalli: [(hlutfall%, grunnur án VSK, VSK upphæð)]
-    var vatBreakdown: [(rate: Decimal, base: Decimal, tax: Decimal)] {
-        let grouped = Dictionary(grouping: lineItems, by: { $0.taxRate })
-        return grouped
-            .map { rate, items in
-                let base = items.reduce(Decimal(0)) { $0 + $1.subtotal }
-                let tax = items.reduce(Decimal(0)) { $0 + $1.taxAmount }
-                return (rate, base, tax)
-            }
+    /// Línusamtölur (án VSK, FYRIR afslátt) flokkað eftir VSK-hlutfalli.
+    /// Notað fyrir skjals-afslátt í UBL (AllowanceCharge per skattflokk).
+    var lineNetByRate: [(rate: Decimal, net: Decimal)] {
+        Dictionary(grouping: lineItems, by: { $0.taxRate })
+            .map { rate, items in (rate, items.reduce(Decimal(0)) { $0 + $1.subtotal }) }
             .sorted { $0.rate < $1.rate }
+    }
+
+    /// Sundurliðun VSK eftir hlutfalli, með afslátt dreginn frá grunni:
+    /// [(hlutfall%, skattstofn eftir afslátt, VSK upphæð)].
+    var vatBreakdown: [(rate: Decimal, base: Decimal, tax: Decimal)] {
+        lineNetByRate.map { rate, net in
+            let base = net * discountFactor
+            return (rate, base, base * rate / 100)
+        }
     }
 }

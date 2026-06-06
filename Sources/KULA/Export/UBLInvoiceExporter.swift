@@ -40,7 +40,7 @@ enum UBLInvoiceExporter {
         supplierParty(&b, company)
         customerParty(&b, invoice.recipient)
         paymentMeans(&b, company, invoice)
-        if invoice.discountValue != 0 { documentAllowance(&b, invoice) }
+        documentAllowances(&b, invoice)
         taxTotal(&b, invoice)
         monetaryTotal(&b, invoice)
         invoiceLines(&b, invoice)
@@ -140,16 +140,22 @@ enum UBLInvoiceExporter {
         b.close("cac:PaymentMeans")
     }
 
-    private static func documentAllowance(_ b: inout XMLBuilder, _ invoice: Invoice) {
-        // Skjals-afsláttur. Athugið: KÚLA reiknar VSK per línu óháð afslætti, svo
-        // strangt PEPPOL-validation getur þurft handvirka aðlögun á skatt-grunni.
-        let rate = invoice.vatBreakdown.first?.rate ?? invoice.taxRate
-        b.open("cac:AllowanceCharge")
-        b.el("cbc:ChargeIndicator", "false")
-        b.el("cbc:AllowanceChargeReason", "Afsláttur")
-        b.el("cbc:Amount", money(invoice.discountValue), attrs: ["currencyID": invoice.currencyCode])
-        taxCategory(&b, rate: rate)
-        b.close("cac:AllowanceCharge")
+    private static func documentAllowances(_ b: inout XMLBuilder, _ invoice: Invoice) {
+        guard invoice.discountAmount != 0 else { return }
+        let cur = invoice.currencyCode
+        let pct = invoice.discountAmount
+        // Eitt document-level AllowanceCharge per VSK-flokk svo skattstofn hvers flokks
+        // lækki rétt og heildartölur rími (BR-S-08, BR-CO-13/15 í PEPPOL EN16931).
+        for group in invoice.lineNetByRate {
+            b.open("cac:AllowanceCharge")
+            b.el("cbc:ChargeIndicator", "false")
+            b.el("cbc:AllowanceChargeReason", "Afsláttur")
+            b.el("cbc:MultiplierFactorNumeric", percent(pct))
+            b.el("cbc:Amount", money(group.net * pct / 100), attrs: ["currencyID": cur])
+            b.el("cbc:BaseAmount", money(group.net), attrs: ["currencyID": cur])
+            taxCategory(&b, rate: group.rate)
+            b.close("cac:AllowanceCharge")
+        }
     }
 
     // MARK: - Tax

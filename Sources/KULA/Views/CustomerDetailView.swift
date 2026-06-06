@@ -3,6 +3,7 @@ import SwiftData
 import Charts
 
 struct CustomerDetailView: View {
+    @Environment(\.modelContext) private var context
     @Bindable var contact: Contact
     var openInvoice: (Invoice) -> Void = { _ in }
 
@@ -21,6 +22,11 @@ struct CustomerDetailView: View {
             }
 
             Section("Reikningar") {
+                Button(action: createInvoice) {
+                    Label("Nýr reikningur", systemImage: "doc.badge.plus")
+                }
+                .disabled(contact.owner == nil)
+
                 if invoices.isEmpty {
                     Text("Engir reikningar enn").foregroundStyle(.secondary)
                 }
@@ -60,6 +66,23 @@ struct CustomerDetailView: View {
         }
         .formStyle(.grouped)
         .navigationTitle(contact.name.isEmpty ? "Viðskiptavinur" : contact.name)
+        .toolbar {
+            ToolbarItem(placement: .primaryAction) {
+                Button(action: createInvoice) {
+                    Label("Nýr reikningur", systemImage: "doc.badge.plus")
+                }
+                .disabled(contact.owner == nil)
+                .help("Nýr reikningur fyrir \(contact.name.isEmpty ? "þennan viðskiptavin" : contact.name)")
+            }
+        }
+    }
+
+    /// Býr til nýjan reikning fyrir þennan viðskiptavin og opnar hann.
+    private func createInvoice() {
+        guard let company = contact.owner else { return }
+        let invoice = Invoice.makeNext(in: context, company: company)
+        invoice.recipient = contact
+        openInvoice(invoice)
     }
 
     // MARK: - KPI

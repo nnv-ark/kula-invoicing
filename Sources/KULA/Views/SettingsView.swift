@@ -302,9 +302,9 @@ private struct AppearanceTab: View {
             }
 
             Section("Merki (logo)") {
-                Slider(value: $settings.logoScale, in: 0.5...2.0, step: 0.05) {
+                Slider(value: $settings.logoScale, in: 0.5...3.0, step: 0.05) {
                     Text("Stærð")
-                } minimumValueLabel: { Text("50%") } maximumValueLabel: { Text("200%") }
+                } minimumValueLabel: { Text("50%") } maximumValueLabel: { Text("300%") }
                 LabeledContent("Skali", value: "\(Int(settings.logoScale * 100))%")
             }
         }

@@ -70,20 +70,19 @@ final class InvoiceMathTests: XCTestCase {
 
     // MARK: - Discount
 
-    func testFlatDiscount() throws {
+    func testDiscountReducesVat() throws {
         let context = try makeContext()
         let invoice = Invoice(number: "3", currencyCode: "ISK", taxRate: 24)
         context.insert(invoice)
         addLine(invoice, into: context, qty: 1, price: 1_000, tax: 24, order: 0)
-        invoice.discountAmount = 200
-        invoice.discountIsPercent = false
+        invoice.discountAmount = 20                         // 20%
 
         XCTAssertEqual(invoice.subtotal, 1_000)
-        XCTAssertEqual(invoice.discountValue, 200)
+        XCTAssertEqual(invoice.discountValue, 200)          // 20% of 1000
         XCTAssertEqual(invoice.taxableBase, 800)
-        // taxValue is summed per-line (24% of 1000 = 240), independent of discount
-        XCTAssertEqual(invoice.taxValue, 240)
-        XCTAssertEqual(invoice.total, 1_040)               // 800 + 240
+        // VSK reiknast af afsláttargrunni: 24% af 800 = 192
+        XCTAssertEqual(invoice.taxValue, 192)
+        XCTAssertEqual(invoice.total, 992)                  // 800 + 192
     }
 
     func testPercentDiscount() throws {
@@ -91,8 +90,7 @@ final class InvoiceMathTests: XCTestCase {
         let invoice = Invoice(number: "4", currencyCode: "ISK", taxRate: 0)
         context.insert(invoice)
         addLine(invoice, into: context, qty: 1, price: 2_000, tax: 0, order: 0)
-        invoice.discountAmount = 10
-        invoice.discountIsPercent = true
+        invoice.discountAmount = 10                         // 10%
 
         XCTAssertEqual(invoice.discountValue, 200)         // 10% of 2000
         XCTAssertEqual(invoice.taxableBase, 1_800)

@@ -78,6 +78,28 @@ final class UBLExportTests: XCTestCase {
         XCTAssertTrue(xml.contains("<cbc:ID>Z</cbc:ID>"))
     }
 
+    func testDocumentDiscountReconciles() throws {
+        let context = try makeContext()
+        let (invoice, company) = sampleInvoice(context)
+        invoice.discountAmount = 10            // 10% afsláttur
+        let xml = UBLInvoiceExporter.xml(for: invoice, company: company)
+
+        // Eitt AllowanceCharge per VSK-flokk (0% og 24%)
+        let allowances = xml.components(separatedBy: "<cac:AllowanceCharge>").count - 1
+        XCTAssertEqual(allowances, 2)
+
+        // 24%-flokkur: skattstofn 90000 → VSK 21600 (af afsláttargrunni)
+        XCTAssertTrue(xml.contains("<cbc:TaxableAmount currencyID=\"ISK\">90000.00</cbc:TaxableAmount>"))
+        XCTAssertTrue(xml.contains("<cbc:TaxAmount currencyID=\"ISK\">21600.00</cbc:TaxAmount>"))
+
+        // Heildartölur ríma (BR-CO-10/13/15)
+        XCTAssertTrue(xml.contains("<cbc:LineExtensionAmount currencyID=\"ISK\">120000.00</cbc:LineExtensionAmount>"))
+        XCTAssertTrue(xml.contains("<cbc:AllowanceTotalAmount currencyID=\"ISK\">12000.00</cbc:AllowanceTotalAmount>"))
+        XCTAssertTrue(xml.contains("<cbc:TaxExclusiveAmount currencyID=\"ISK\">108000.00</cbc:TaxExclusiveAmount>"))
+        XCTAssertTrue(xml.contains("<cbc:TaxInclusiveAmount currencyID=\"ISK\">129600.00</cbc:TaxInclusiveAmount>"))
+        XCTAssertTrue(xml.contains("<cbc:PayableAmount currencyID=\"ISK\">129600.00</cbc:PayableAmount>"))
+    }
+
     func testTwoInvoiceLines() throws {
         let context = try makeContext()
         let (invoice, company) = sampleInvoice(context)

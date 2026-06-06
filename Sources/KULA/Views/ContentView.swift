@@ -39,8 +39,7 @@ struct ContentView: View {
             if let company = activeCompany {
                 switch selection {
                 case .dashboard:
-                    ContentUnavailableView("Mælaborð", systemImage: "chart.bar.xaxis",
-                                           description: Text("Yfirlit fyrirtækis birtist til hægri."))
+                    dashboardBranding(company)
                 case .invoices, .none:
                     InvoiceListView(company: company, selection: $selectedInvoice)
                         .id(company.id)               // ný fyrirspurn þegar skipt er um fyrirtæki
@@ -156,6 +155,30 @@ struct ContentView: View {
 
     private var activeCompany: AppSettings? {
         companies.first { $0.id.uuidString == activeCompanyID } ?? companies.first
+    }
+
+    /// Stórt fyrirtækislógó í dálki 2 þegar mælaborð er valið
+    /// (nafn fyrirtækis til vara ef ekkert lógó er sett).
+    @ViewBuilder
+    private func dashboardBranding(_ company: AppSettings) -> some View {
+        VStack(spacing: 16) {
+            Spacer()
+            if let data = company.logoData, let img = NSImage(data: data) {
+                Image(nsImage: img)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(maxWidth: 320, maxHeight: 320)
+                    .accessibilityLabel(Text(company.displayName))
+            } else {
+                Text(company.displayName.isEmpty ? "FYRIRTÆKI" : company.displayName)
+                    .font(.largeTitle.weight(.semibold))
+                    .multilineTextAlignment(.center)
+                    .foregroundStyle(.secondary)
+            }
+            Spacer()
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .padding(40)
     }
 
     /// App-vörumerki efst í hliðarstiku.

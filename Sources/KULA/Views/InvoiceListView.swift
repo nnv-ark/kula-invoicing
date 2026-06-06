@@ -106,7 +106,6 @@ struct InvoiceListView: View {
         copy.note = src.note
         copy.templateName = src.templateName
         copy.discountAmount = src.discountAmount
-        copy.discountIsPercent = src.discountIsPercent
         copy.isTaxInclusive = src.isTaxInclusive
         copy.paymentTermDays = src.paymentTermDays
         if let term = copy.paymentTermDays {

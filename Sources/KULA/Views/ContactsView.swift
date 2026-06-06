@@ -6,6 +6,7 @@ struct ContactsView: View {
     @Query private var contacts: [Contact]
     @Binding var selection: Contact?
     @State private var isImporting = false
+    @State private var searchText = ""
 
     private let company: AppSettings
 
@@ -16,9 +17,18 @@ struct ContactsView: View {
         _contacts = Query(filter: #Predicate<Contact> { $0.owner?.id == cid }, sort: \Contact.name)
     }
 
+    private var filteredContacts: [Contact] {
+        let q = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !q.isEmpty else { return contacts }
+        return contacts.filter { c in
+            [c.name, c.company, c.email, c.phone, c.nationalID]
+                .contains { $0.localizedCaseInsensitiveContains(q) }
+        }
+    }
+
     var body: some View {
         List(selection: $selection) {
-            ForEach(contacts) { contact in
+            ForEach(filteredContacts) { contact in
                 VStack(alignment: .leading, spacing: 1) {
                     Text(contact.name.isEmpty ? "(nafnlaus)" : contact.name).font(.headline)
                     if !contact.email.isEmpty {
@@ -47,9 +57,15 @@ struct ContactsView: View {
                 }
             }
             .onDelete { offsets in
-                for i in offsets { context.delete(contacts[i]) }
+                let items = filteredContacts
+                for i in offsets {
+                    let contact = items[i]
+                    if selection == contact { selection = nil }
+                    context.delete(contact)
+                }
             }
         }
+        .searchable(text: $searchText, placement: .automatic, prompt: "Leita að viðskiptavini")
         .navigationTitle("Viðskiptavinir")
         .toolbar {
             ToolbarItemGroup(placement: .primaryAction) {
