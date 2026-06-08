@@ -2,6 +2,8 @@ import Foundation
 import StoreKit
 import os
 
+private let subscriptionLog = Logger(subsystem: "is.calmail.kula", category: "subscription")
+
 /// Heldur utan um áskriftarstöðu appsins (StoreKit 2).
 /// KÚLA er „allt læst": appið krefst virkrar áskriftar (með 1 viku fríum reynslutíma).
 @MainActor
@@ -17,7 +19,6 @@ final class SubscriptionStore {
     private(set) var lastError: String?
 
     private var updatesTask: Task<Void, Never>?
-    private let log = Logger(subsystem: "is.calmail.kula", category: "subscription")
 
     init() {
         // Hlusta á uppfærslur (kaup utan apps, endurnýjun, endurgreiðslur) allan líftímann.
@@ -36,10 +37,10 @@ final class SubscriptionStore {
         do {
             product = try await Product.products(for: [Self.yearlyProductID]).first
             if product == nil {
-                log.error("Subscription product not found: \(Self.yearlyProductID, privacy: .public)")
+                subscriptionLog.error("Subscription product not found: \(Self.yearlyProductID, privacy: .public)")
             }
         } catch {
-            log.error("Failed to load products: \(error, privacy: .public)")
+            subscriptionLog.error("Failed to load products: \(error, privacy: .public)")
             lastError = error.localizedDescription
         }
         await refreshStatus()
@@ -62,7 +63,7 @@ final class SubscriptionStore {
                 break
             }
         } catch {
-            log.error("Purchase failed: \(error, privacy: .public)")
+            subscriptionLog.error("Purchase failed: \(error, privacy: .public)")
             lastError = error.localizedDescription
         }
     }
@@ -72,7 +73,7 @@ final class SubscriptionStore {
         do {
             try await AppStore.sync()
         } catch {
-            log.error("Restore failed: \(error, privacy: .public)")
+            subscriptionLog.error("Restore failed: \(error, privacy: .public)")
             lastError = error.localizedDescription
         }
         await refreshStatus()

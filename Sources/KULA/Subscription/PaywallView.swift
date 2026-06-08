@@ -3,7 +3,7 @@ import StoreKit
 
 /// Áskriftarskjár — sýndur þegar engin virk áskrift er. Lokar á allt appið.
 struct PaywallView: View {
-    @Bindable var store: SubscriptionStore
+    let store: SubscriptionStore
     @State private var isWorking = false
 
     private let features: [(icon: String, text: String)] = [
