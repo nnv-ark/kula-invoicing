@@ -1,0 +1,52 @@
+{
+  "identifier" : "5C9A1F20-KULA-STOREKIT-CONFIG",
+  "nonRenewingSubscriptions" : [],
+  "products" : [],
+  "settings" : {
+    "_applicationInternalID" : "6777342177",
+    "_developerTeamID" : "WS56KAUU82",
+    "_failTransactionsEnabled" : false,
+    "_locale" : "en_US",
+    "_storefront" : "USA",
+    "_storeKitErrors" : []
+  },
+  "subscriptionGroups" : [
+    {
+      "id" : "A1B2C3D4-KULA-GROUP-0001",
+      "localizations" : [],
+      "name" : "KÚLA",
+      "subscriptions" : [
+        {
+          "adHocOffers" : [],
+          "codeOffers" : [],
+          "displayPrice" : "9.99",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "B2C3D4E5-KULA-SUB-00000001",
+          "introductoryOffer" : {
+            "internalID" : "C3D4E5F6-KULA-INTRO-0001",
+            "paymentMode" : "free",
+            "subscriptionPeriod" : "P1W"
+          },
+          "localizations" : [
+            {
+              "description" : "Full access to KÚLA invoicing",
+              "displayName" : "KÚLA áskrift",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "is.calmail.kula.yearly",
+          "recurringSubscriptionPeriod" : "P1Y",
+          "referenceName" : "KÚLA Yearly",
+          "subscriptionGroupID" : "A1B2C3D4-KULA-GROUP-0001",
+          "type" : "RecurringSubscription",
+          "winbackOffers" : []
+        }
+      ]
+    }
+  ],
+  "version" : {
+    "major" : 4,
+    "minor" : 0
+  }
+}

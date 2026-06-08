@@ -91,14 +91,14 @@ struct ContentView: View {
                 didNormalize = true
             }
         }
-        .onChange(of: activeCompanyID) {
+        .onChange(of: activeCompanyID) { _, _ in // Using two throwaway parameters to fix the deprecation warning
             selectedInvoice = nil   // gögn annars fyrirtækis eiga ekki að haldast valin
             selectedContact = nil
         }
         .focusedSceneValue(\.newInvoice, createInvoice)
     }
 
-    /// Eldri gögn án fyrirtækis eru færð á virkt fyrirtæki svo þau hverfi ekki.
+    /// Eldri gögn án fyrirtæris eru færð á virkt fyrirtæki svo þau hverfi ekki.
     private func migrateOrphans(to company: AppSettings) {
         if let invoices = try? context.fetch(FetchDescriptor<Invoice>(predicate: #Predicate { $0.issuer == nil })) {
             for inv in invoices { inv.issuer = company }
@@ -157,7 +157,7 @@ struct ContentView: View {
         companies.first { $0.id.uuidString == activeCompanyID } ?? companies.first
     }
 
-    /// Stórt fyrirtækislógó í dálki 2 þegar mælaborð er valið
+    /// Stórt fyrirtæktislógó í dálki 2 þegar mælaborð er valið
     /// (nafn fyrirtækis til vara ef ekkert lógó er sett).
     @ViewBuilder
     private func dashboardBranding(_ company: AppSettings) -> some View {
@@ -184,7 +184,8 @@ struct ContentView: View {
     /// App-vörumerki efst í hliðarstiku.
     private var brandHeader: some View {
         HStack(spacing: 8) {
-            Image("Logo")
+            // REVISED FOR NEW LOGO ASSET: You must replace "KULA_Icon" with the actual name of your asset file.
+            Image("KULA_Icon")
                 .resizable()
                 .scaledToFill()
                 .frame(width: 26, height: 26)
@@ -198,7 +199,7 @@ struct ContentView: View {
         .padding(.bottom, 2)
     }
 
-    /// Native fyrirtækjaval efst í hliðarstiku — popup með haki á virku fyrirtæki.
+    /// Native fyrirtækkjaval efst í hliðarstiku — popup með haki á virku fyrirtæki.
     private var companySwitcher: some View {
         Menu {
             Picker("Fyrirtæki", selection: $activeCompanyID) {

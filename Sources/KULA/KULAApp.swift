@@ -23,7 +23,7 @@ struct KULAApp: App {
 
     var body: some Scene {
         WindowGroup("KÚLA") {
-            ContentView()
+            RootView()
         }
         .modelContainer(container)
         .defaultSize(width: 1200, height: 760)
@@ -34,6 +34,29 @@ struct KULAApp: App {
                 .modelContainer(container)
         }
         .defaultSize(width: 620, height: 520)
+    }
+}
+
+// MARK: - Rótarsýn — áskriftargátt
+
+/// Sýnir aðalviðmótið ef áskrift er virk, annars áskriftarskjáinn.
+struct RootView: View {
+    @State private var subscriptions = SubscriptionStore()
+
+    var body: some View {
+        ZStack {
+            if subscriptions.isSubscribed {
+                ContentView()
+            } else if subscriptions.isLoading {
+                ProgressView()
+                    .controlSize(.large)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background(.background)
+            } else {
+                PaywallView(store: subscriptions)
+            }
+        }
+        .environment(subscriptions)
     }
 }
 
