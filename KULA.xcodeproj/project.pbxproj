@@ -20,6 +20,8 @@
 		3000000000000000000000BC /* BatchExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2000000000000000000000BC /* BatchExporter.swift */; };
 		3000000000000000000000B8 /* ContactImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2000000000000000000000B8 /* ContactImporter.swift */; };
 		3000000000000000000000B9 /* ContactImportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2000000000000000000000B9 /* ContactImportView.swift */; };
+		3000000000000000000000E1 /* SubscriptionStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2000000000000000000000E1 /* SubscriptionStore.swift */; };
+		3000000000000000000000E2 /* PaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2000000000000000000000E2 /* PaywallView.swift */; };
 		3000000000000000000000BA /* CustomerDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2000000000000000000000BA /* CustomerDetailView.swift */; };
 		3000000000000000000000BB /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2000000000000000000000BB /* DashboardView.swift */; };
 		3000000000000000000000AA /* InvoiceTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2000000000000000000000AA /* InvoiceTemplate.swift */; };
@@ -48,6 +50,8 @@
 		2000000000000000000000BC /* BatchExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatchExporter.swift; sourceTree = "<group>"; };
 		2000000000000000000000B8 /* ContactImporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactImporter.swift; sourceTree = "<group>"; };
 		2000000000000000000000B9 /* ContactImportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactImportView.swift; sourceTree = "<group>"; };
+		2000000000000000000000E1 /* SubscriptionStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionStore.swift; sourceTree = "<group>"; };
+		2000000000000000000000E2 /* PaywallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallView.swift; sourceTree = "<group>"; };
 		2000000000000000000000BA /* CustomerDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerDetailView.swift; sourceTree = "<group>"; };
 		2000000000000000000000BB /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		2000000000000000000000AA /* InvoiceTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceTemplate.swift; sourceTree = "<group>"; };
@@ -121,6 +125,7 @@
 				1000000000000000000000D8 /* PDF */,
 				1000000000000000000000D9 /* Export */,
 				1000000000000000000000DA /* Import */,
+				1000000000000000000000DB /* Subscription */,
 			);
 			path = KULA;
 			sourceTree = "<group>";
@@ -186,6 +191,15 @@
 				2000000000000000000000B8 /* ContactImporter.swift */,
 			);
 			path = Import;
+			sourceTree = "<group>";
+		};
+		1000000000000000000000DB /* Subscription */ = {
+			isa = PBXGroup;
+			children = (
+				2000000000000000000000E1 /* SubscriptionStore.swift */,
+				2000000000000000000000E2 /* PaywallView.swift */,
+			);
+			path = Subscription;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -281,6 +295,8 @@
 				3000000000000000000000AE /* InvoiceDetailView.swift in Sources */,
 				3000000000000000000000AF /* InvoiceListView.swift in Sources */,
 				3000000000000000000000B0 /* SettingsView.swift in Sources */,
+				3000000000000000000000E1 /* SubscriptionStore.swift in Sources */,
+				3000000000000000000000E2 /* PaywallView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
