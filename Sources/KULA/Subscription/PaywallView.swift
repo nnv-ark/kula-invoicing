@@ -7,11 +7,9 @@ struct PaywallView: View {
     @State private var isWorking = false
 
     private let features: [(icon: String, text: String)] = [
-        ("doc.text", "Íslenskt reikningssnið með VSK, PDF og lögboðnum fæti"),
-        ("building.2", "Mörg fyrirtæki — skiptu á milli með einum smelli"),
-        ("chart.bar.xaxis", "Mælaborð: sala, innheimt, útistandandi og greiðsluhraði"),
-        ("arrow.up.doc", "Rafrænn reikningur (UBL / TS-136 / PEPPOL) og fjöldaútflutningur"),
-        ("lock.shield", "Öll gögn staðbundin á Mac-tölvunni — ekkert ský")
+        ("building.2", "Mörg fyrirtæki? Ekkert mál! Auðvelt að skipta á milli — og kostar ekki aukalega."),
+        ("chart.bar.xaxis", "Mælaborð: sala, innheimt, útistandandi og greiðsluhraði — meiri upplýsingar á leiðinni."),
+        ("arrow.up.doc", "XML-stuðningur og auðvelt að flytja allt út í einu.")
     ]
 
     var body: some View {
@@ -20,16 +18,17 @@ struct PaywallView: View {
 
             Image("Logo")
                 .resizable().scaledToFit()
-                .frame(width: 88, height: 88)
-                .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
+                .frame(width: 96, height: 96)
+                .clipShape(Circle())
                 .shadow(radius: 8, y: 4)
 
             Text("KÚLA")
                 .font(.largeTitle.weight(.bold))
                 .padding(.top, 12)
-            Text("Reikningagerð fyrir íslensk fyrirtæki")
+            Text("Reikningagerð fyrir íslensk fyrirtæki og verktaka")
                 .font(.title3)
                 .foregroundStyle(.secondary)
+                .multilineTextAlignment(.center)
 
             VStack(alignment: .leading, spacing: 14) {
                 ForEach(features, id: \.text) { feature in
@@ -67,7 +66,7 @@ struct PaywallView: View {
                 Button {
                     Task { isWorking = true; await store.purchase(); isWorking = false }
                 } label: {
-                    Text(ctaTitle(for: product))
+                    Text("KAUPA")
                         .font(.headline)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 6)
@@ -104,13 +103,6 @@ struct PaywallView: View {
     }
 
     // MARK: - Texti
-
-    private func ctaTitle(for product: Product) -> String {
-        if hasFreeTrial(product) {
-            return "Hefja — 1 vika frí"
-        }
-        return "Gerast áskrifandi — \(product.displayPrice)/ár"
-    }
 
     private func disclosure(for product: Product) -> String {
         let price = product.displayPrice

@@ -181,15 +181,14 @@ struct ContentView: View {
         .padding(40)
     }
 
-    /// App-vörumerki efst í hliðarstiku.
+    /// App-vörumerki efst í hliðarstiku — birtist aðeins einu sinni.
     private var brandHeader: some View {
         HStack(spacing: 8) {
-            // REVISED FOR NEW LOGO ASSET: You must replace "KULA_Icon" with the actual name of your asset file.
-            Image("KULA_Icon")
+            Image("Logo")
                 .resizable()
-                .scaledToFill()
+                .scaledToFit()
                 .frame(width: 26, height: 26)
-                .clipShape(RoundedRectangle(cornerRadius: 6, style: .continuous))
+                .clipShape(Circle())
             Text("KÚLA")
                 .font(.headline)
             Spacer()
@@ -209,15 +208,24 @@ struct ContentView: View {
             }
             .pickerStyle(.inline)          // gefur haka á virku fyrirtæki
         } label: {
-            HStack(spacing: 8) {
-                Image(systemName: "building.2.crop.circle")
-                    .foregroundStyle(.secondary)
+            HStack(spacing: 10) {
+                if let data = activeCompany?.logoData, let img = NSImage(data: data) {
+                    Image(nsImage: img)
+                        .resizable().scaledToFill()
+                        .frame(width: 32, height: 32)
+                        .clipShape(RoundedRectangle(cornerRadius: 7, style: .continuous))
+                } else {
+                    Image(systemName: "building.2.crop.circle")
+                        .font(.title)
+                        .foregroundStyle(.secondary)
+                        .frame(width: 32, height: 32)
+                }
                 Text(activeCompany?.displayName ?? "Fyrirtæki")
-                    .fontWeight(.medium)
+                    .font(.title3.weight(.semibold))
                     .lineLimit(1)
                 Spacer()
                 Image(systemName: "chevron.up.chevron.down")
-                    .font(.caption2)
+                    .font(.caption)
                     .foregroundStyle(.secondary)
             }
             .contentShape(Rectangle())

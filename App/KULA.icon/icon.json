@@ -1,161 +1,33 @@
 {
-  "fill-specializations" : [
-    {
-      "value" : {
-        "linear-gradient" : [
-          "display-p3:0.13458,0.61012,0.13336,1.00000",
-          "display-p3:0.00683,0.47255,0.00234,1.00000"
-        ],
-        "orientation" : {
-          "start" : {
-            "x" : 0.5,
-            "y" : 0
-          },
-          "stop" : {
-            "x" : 0.5,
-            "y" : 0.7
-          }
-        }
-      }
-    },
-    {
-      "appearance" : "dark",
-      "value" : {
-        "linear-gradient" : [
-          "display-p3:0.00000,0.00000,0.00000,1.00000",
-          "display-p3:0.01015,0.68919,0.00000,1.00000"
-        ],
-        "orientation" : {
-          "start" : {
-            "x" : 0.5,
-            "y" : 0
-          },
-          "stop" : {
-            "x" : 0.5,
-            "y" : 0.7
-          }
-        }
+  "fill" : {
+    "linear-gradient" : [
+      "extended-srgb:0.79608,0.18824,0.87843,1.00000",
+      "extended-srgb:0.00000,0.78431,0.70196,1.00000"
+    ],
+    "orientation" : {
+      "start" : {
+        "x" : 0.5,
+        "y" : 1
+      },
+      "stop" : {
+        "x" : 0.5,
+        "y" : 0.3
       }
     }
-  ],
+  },
   "groups" : [
     {
       "layers" : [
         {
-          "blend-mode-specializations" : [
-            {
-              "value" : "plus-lighter"
-            },
-            {
-              "appearance" : "dark",
-              "value" : "plus-darker"
-            }
-          ],
-          "fill" : {
-            "solid" : "extended-gray:1.00000,1.00000"
-          },
-          "glass" : true,
-          "hidden" : false,
-          "image-name" : "Image 2.png",
-          "name" : "Image 2",
-          "position" : {
-            "scale" : 0.55,
-            "translation-in-points" : [
-              -416.70937499999985,
-              -165.59718750000002
-            ]
-          }
-        },
-        {
-          "blend-mode-specializations" : [
-            {
-              "value" : "plus-lighter"
-            },
-            {
-              "appearance" : "dark",
-              "value" : "plus-darker"
-            }
-          ],
-          "fill" : {
-            "solid" : "extended-gray:1.00000,1.00000"
-          },
+          "blend-mode" : "darken",
           "glass" : false,
-          "hidden" : false,
-          "image-name" : "Image 2.png",
-          "name" : "Image 2",
+          "image-name" : "Image.png",
+          "name" : "Image",
           "position" : {
-            "scale" : 0.55,
+            "scale" : 0.12,
             "translation-in-points" : [
-              -416.70937499999985,
-              -165.59718750000002
-            ]
-          }
-        }
-      ],
-      "shadow" : {
-        "kind" : "neutral",
-        "opacity" : 0.5
-      },
-      "translucency" : {
-        "enabled" : true,
-        "value" : 0.5
-      }
-    },
-    {
-      "layers" : [
-        {
-          "blend-mode-specializations" : [
-            {
-              "value" : "plus-lighter"
-            },
-            {
-              "appearance" : "dark",
-              "value" : "plus-darker"
-            }
-          ],
-          "glass" : true,
-          "hidden" : false,
-          "image-name" : "Image 2.png",
-          "name" : "Image 2",
-          "position" : {
-            "scale" : 0.55,
-            "translation-in-points" : [
-              322.61875000000015,
-              411.50125
-            ]
-          }
-        }
-      ],
-      "shadow" : {
-        "kind" : "neutral",
-        "opacity" : 0.5
-      },
-      "translucency" : {
-        "enabled" : true,
-        "value" : 0.5
-      }
-    },
-    {
-      "layers" : [
-        {
-          "blend-mode-specializations" : [
-            {
-              "value" : "plus-lighter"
-            },
-            {
-              "appearance" : "dark",
-              "value" : "plus-darker"
-            }
-          ],
-          "glass" : false,
-          "hidden" : false,
-          "image-name" : "Image 2.png",
-          "name" : "Image 2",
-          "position" : {
-            "scale" : 0.55,
-            "translation-in-points" : [
-              322.61875000000015,
-              411.50125
+              -2.4049999999999727,
+              23.075000000000045
             ]
           }
         }
