@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3000000000000000000000A1 /* KULAApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2000000000000000000000A1 /* KULAApp.swift */; };
 		3000000000000000000000B7 /* FocusedActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2000000000000000000000B7 /* FocusedActions.swift */; };
+		3000000000000000000000E3 /* DemoSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2000000000000000000000E3 /* DemoSupport.swift */; };
 		3000000000000000000000A2 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2000000000000000000000A2 /* AppSettings.swift */; };
 		3000000000000000000000A3 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2000000000000000000000A3 /* Contact.swift */; };
 		3000000000000000000000A4 /* Invoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2000000000000000000000A4 /* Invoice.swift */; };
@@ -39,6 +40,7 @@
 /* Begin PBXFileReference section */
 		2000000000000000000000A1 /* KULAApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KULAApp.swift; sourceTree = "<group>"; };
 		2000000000000000000000B7 /* FocusedActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusedActions.swift; sourceTree = "<group>"; };
+		2000000000000000000000E3 /* DemoSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoSupport.swift; sourceTree = "<group>"; };
 		2000000000000000000000A2 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		2000000000000000000000A3 /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		2000000000000000000000A4 /* Invoice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Invoice.swift; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 			children = (
 				2000000000000000000000A1 /* KULAApp.swift */,
 				2000000000000000000000B7 /* FocusedActions.swift */,
+				2000000000000000000000E3 /* DemoSupport.swift */,
 				1000000000000000000000D5 /* Models */,
 				1000000000000000000000D6 /* Views */,
 				1000000000000000000000D7 /* Templates */,
@@ -274,6 +277,7 @@
 			files = (
 				3000000000000000000000A1 /* KULAApp.swift in Sources */,
 				3000000000000000000000B7 /* FocusedActions.swift in Sources */,
+				3000000000000000000000E3 /* DemoSupport.swift in Sources */,
 				3000000000000000000000A2 /* AppSettings.swift in Sources */,
 				3000000000000000000000B4 /* CustomStatus.swift in Sources */,
 				3000000000000000000000A3 /* Contact.swift in Sources */,

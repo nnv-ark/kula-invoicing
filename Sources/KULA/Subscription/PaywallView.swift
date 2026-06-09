@@ -62,43 +62,59 @@ struct PaywallView: View {
         if store.isLoading {
             ProgressView().controlSize(.large)
         } else if let product = store.product {
-            VStack(spacing: 12) {
-                Button {
-                    Task { isWorking = true; await store.purchase(); isWorking = false }
-                } label: {
-                    Text("KAUPA")
-                        .font(.headline)
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 6)
-                }
-                .buttonStyle(.borderedProminent)
-                .controlSize(.large)
-                .disabled(isWorking)
-
-                Text(disclosure(for: product))
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-                    .multilineTextAlignment(.center)
-                    .fixedSize(horizontal: false, vertical: true)
-
-                HStack(spacing: 16) {
-                    Button("Endurheimta kaup") { Task { await store.restore() } }
-                        .disabled(isWorking)
-                    Link("Persónuvernd", destination: URL(string: "https://github.com/nnv-ark/kula-invoicing/blob/main/PRIVACY.md")!)
-                    Link("Skilmálar", destination: URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/")!)
-                }
-                .font(.caption)
-            }
+            buySection(disclosure: disclosure(for: product))
         } else {
-            VStack(spacing: 10) {
-                Text("Tókst ekki að sækja áskriftina.")
-                    .foregroundStyle(.secondary)
-                if let err = store.lastError {
-                    Text(err).font(.caption).foregroundStyle(.secondary)
-                }
-                Button("Reyna aftur") { Task { await store.load() } }
-                    .buttonStyle(.bordered)
+            #if DEBUG
+            if Demo.showPaywall {
+                buySection(disclosure: "Ókeypis í 1 viku, svo 1.490 kr. á ári. Endurnýjast sjálfkrafa þar til þú segir upp í App Store. Hægt að segja upp hvenær sem er.")
+            } else {
+                errorSection
             }
+            #else
+            errorSection
+            #endif
+        }
+    }
+
+    private func buySection(disclosure: String) -> some View {
+        VStack(spacing: 12) {
+            Button {
+                Task { isWorking = true; await store.purchase(); isWorking = false }
+            } label: {
+                Text("KAUPA")
+                    .font(.headline)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 6)
+            }
+            .buttonStyle(.borderedProminent)
+            .controlSize(.large)
+            .disabled(isWorking)
+
+            Text(disclosure)
+                .font(.caption)
+                .foregroundStyle(.secondary)
+                .multilineTextAlignment(.center)
+                .fixedSize(horizontal: false, vertical: true)
+
+            HStack(spacing: 16) {
+                Button("Endurheimta kaup") { Task { await store.restore() } }
+                    .disabled(isWorking)
+                Link("Persónuvernd", destination: URL(string: "https://github.com/nnv-ark/kula-invoicing/blob/main/PRIVACY.md")!)
+                Link("Skilmálar", destination: URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/")!)
+            }
+            .font(.caption)
+        }
+    }
+
+    private var errorSection: some View {
+        VStack(spacing: 10) {
+            Text("Tókst ekki að sækja áskriftina.")
+                .foregroundStyle(.secondary)
+            if let err = store.lastError {
+                Text(err).font(.caption).foregroundStyle(.secondary)
+            }
+            Button("Reyna aftur") { Task { await store.load() } }
+                .buttonStyle(.bordered)
         }
     }
 

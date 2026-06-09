@@ -10,15 +10,29 @@ struct KULAApp: App {
 
     init() {
         do {
+            #if DEBUG
+            // Demó-ham keyrir á in-memory grunni svo sýnigögn snerti ekki raunveruleg gögn.
+            let config = Demo.isActive ? ModelConfiguration(isStoredInMemoryOnly: true) : ModelConfiguration()
+            container = try ModelContainer(
+                for: Invoice.self, LineItem.self, Contact.self, AppSettings.self, CustomStatus.self,
+                configurations: config
+            )
+            #else
             container = try ModelContainer(
                 for: Invoice.self, LineItem.self, Contact.self, AppSettings.self, CustomStatus.self
             )
+            #endif
         } catch {
             // ModelContainer failure at launch is unrecoverable — the store is corrupt or
             // the schema is incompatible. Surface it via Logger before terminating.
             appLog.fault("Failed to create ModelContainer: \(error, privacy: .public)")
             fatalError("Failed to create ModelContainer: \(error)")
         }
+        #if DEBUG
+        if Demo.isActive {
+            MainActor.assumeIsolated { Demo.seedIfNeeded(container.mainContext) }
+        }
+        #endif
     }
 
     var body: some Scene {
@@ -43,9 +57,26 @@ struct KULAApp: App {
 struct RootView: View {
     @State private var subscriptions = SubscriptionStore()
 
+    private var forcePaywall: Bool {
+        #if DEBUG
+        return Demo.showPaywall
+        #else
+        return false
+        #endif
+    }
+
+    private var unlocked: Bool {
+        #if DEBUG
+        if Demo.isActive { return true }
+        #endif
+        return subscriptions.isSubscribed
+    }
+
     var body: some View {
         ZStack {
-            if subscriptions.isSubscribed {
+            if forcePaywall {
+                PaywallView(store: subscriptions)
+            } else if unlocked {
                 ContentView()
             } else if subscriptions.isLoading {
                 ProgressView()
