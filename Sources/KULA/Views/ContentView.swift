@@ -167,7 +167,8 @@ struct ContentView: View {
                 Image(nsImage: img)
                     .resizable()
                     .scaledToFit()
-                    .frame(maxWidth: 320, maxHeight: 320)
+                    // Aldrei stærra en lógóið á opnunarskjánum (96 px).
+                    .frame(maxWidth: 96, maxHeight: 96)
                     .accessibilityLabel(Text(company.displayName))
             } else {
                 Text(company.displayName.isEmpty ? "FYRIRTÆKI" : company.displayName)
@@ -198,39 +199,42 @@ struct ContentView: View {
         .padding(.bottom, 2)
     }
 
-    /// Native fyrirtækkjaval efst í hliðarstiku — popup með haki á virku fyrirtæki.
+    /// Native fyrirtækjaval efst í hliðarstiku — popup með haki á virku fyrirtæki.
+    /// Lógóið er FYRIR UTAN Menu-ið; macOS Menu-merkimiði virðir ekki stærð á mynd.
     private var companySwitcher: some View {
-        Menu {
-            Picker("Fyrirtæki", selection: $activeCompanyID) {
-                ForEach(companies) { c in
-                    Text(c.displayName).tag(c.id.uuidString)
-                }
-            }
-            .pickerStyle(.inline)          // gefur haka á virku fyrirtæki
-        } label: {
-            HStack(spacing: 10) {
-                if let data = activeCompany?.logoData, let img = NSImage(data: data) {
-                    Image(nsImage: img)
-                        .resizable().scaledToFill()
-                        .frame(width: 32, height: 32)
-                        .clipShape(RoundedRectangle(cornerRadius: 7, style: .continuous))
-                } else {
-                    Image(systemName: "building.2.crop.circle")
-                        .font(.title)
-                        .foregroundStyle(.secondary)
-                        .frame(width: 32, height: 32)
-                }
-                Text(activeCompany?.displayName ?? "Fyrirtæki")
-                    .font(.title3.weight(.semibold))
-                    .lineLimit(1)
-                Spacer()
-                Image(systemName: "chevron.up.chevron.down")
-                    .font(.caption)
+        HStack(spacing: 10) {
+            if let data = activeCompany?.logoData, let img = NSImage(data: data) {
+                Image(nsImage: img)
+                    .resizable().scaledToFit()
+                    .frame(width: 30, height: 30)
+                    .clipShape(RoundedRectangle(cornerRadius: 7, style: .continuous))
+            } else {
+                Image(systemName: "building.2.crop.circle")
+                    .font(.title)
                     .foregroundStyle(.secondary)
+                    .frame(width: 30, height: 30)
             }
-            .contentShape(Rectangle())
+            Menu {
+                Picker("Fyrirtæki", selection: $activeCompanyID) {
+                    ForEach(companies) { c in
+                        Text(c.displayName).tag(c.id.uuidString)
+                    }
+                }
+                .pickerStyle(.inline)          // gefur haka á virku fyrirtæki
+            } label: {
+                HStack(spacing: 6) {
+                    Text(activeCompany?.displayName ?? "Fyrirtæki")
+                        .font(.title3.weight(.semibold))
+                        .lineLimit(1)
+                    Spacer()
+                    Image(systemName: "chevron.up.chevron.down")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+                .contentShape(Rectangle())
+            }
+            .menuStyle(.borderlessButton)
         }
-        .menuStyle(.borderlessButton)
         .padding(.horizontal, 12)
         .padding(.vertical, 8)
         .background(.bar)

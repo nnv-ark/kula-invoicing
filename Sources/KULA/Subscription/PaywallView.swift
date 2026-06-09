@@ -81,10 +81,14 @@ struct PaywallView: View {
             Button {
                 Task { isWorking = true; await store.purchase(); isWorking = false }
             } label: {
-                Text("KAUPA")
-                    .font(.headline)
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 6)
+                VStack(spacing: 2) {
+                    Text("KAUPA")
+                        .font(.headline)
+                    Text("prófa frítt í eina viku")
+                        .font(.caption)
+                }
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 6)
             }
             .buttonStyle(.borderedProminent)
             .controlSize(.large)

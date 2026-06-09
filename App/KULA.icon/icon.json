@@ -1,7 +1,7 @@
 {
   "fill" : {
     "linear-gradient" : [
-      "extended-srgb:0.79608,0.18824,0.87843,1.00000",
+      "display-p3:0.78898,0.58590,0.84945,1.00000",
       "extended-srgb:0.00000,0.78431,0.70196,1.00000"
     ],
     "orientation" : {
@@ -20,11 +20,11 @@
       "layers" : [
         {
           "blend-mode" : "darken",
-          "glass" : false,
+          "glass" : true,
           "image-name" : "Image.png",
           "name" : "Image",
           "position" : {
-            "scale" : 0.12,
+            "scale" : 0.88,
             "translation-in-points" : [
               -2.4049999999999727,
               23.075000000000045
