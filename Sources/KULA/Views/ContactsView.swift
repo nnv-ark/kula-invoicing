@@ -5,7 +5,6 @@ struct ContactsView: View {
     @Environment(\.modelContext) private var context
     @Query private var contacts: [Contact]
     @Binding var selection: Contact?
-    @State private var isImporting = false
     @State private var searchText = ""
 
     private let company: AppSettings
@@ -70,19 +69,12 @@ struct ContactsView: View {
         .toolbar {
             ToolbarItemGroup(placement: .primaryAction) {
                 Button {
-                    isImporting = true
-                } label: { Label("Flytja inn úr Tengiliðum", systemImage: "square.and.arrow.down") }
-
-                Button {
                     let c = Contact(name: "Nýr viðskiptavinur")
                     c.owner = company
                     context.insert(c)
                     selection = c
                 } label: { Label("Nýr viðskiptavinur", systemImage: "person.badge.plus") }
             }
-        }
-        .sheet(isPresented: $isImporting) {
-            ContactImportView(company: company)
         }
     }
 }

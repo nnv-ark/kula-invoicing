@@ -5,7 +5,7 @@ import os
 private let subscriptionLog = Logger(subsystem: "is.calmail.kula", category: "subscription")
 
 /// Heldur utan um áskriftarstöðu appsins (StoreKit 2).
-/// KÚLA er „allt læst": appið krefst virkrar áskriftar (með 1 viku fríum reynslutíma).
+/// RUKK er „allt læst": appið krefst virkrar áskriftar (með 1 viku fríum reynslutíma).
 @MainActor
 @Observable
 final class SubscriptionStore {

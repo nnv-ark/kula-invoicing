@@ -36,7 +36,9 @@ struct KULAApp: App {
     }
 
     var body: some Scene {
-        WindowGroup("KÚLA") {
+        // Single-glugga svið: macOS bætir sjálfkrafa „RUKK“ atriði í Window-valmyndina
+        // svo opna megi gluggann aftur eftir að honum er lokað (App Review gl. 4.0).
+        Window("RUKK", id: "main") {
             RootView()
         }
         .modelContainer(container)
@@ -66,10 +68,16 @@ struct RootView: View {
     }
 
     private var unlocked: Bool {
+        #if BETA_UNLOCK
+        // Ópinber beta (GitHub DMG): StoreKit virkar ekki utan App Store/TestFlight,
+        // svo paywall er sleppt. Fáninn er aldrei skilgreindur í App Store-byggingum.
+        return true
+        #else
         #if DEBUG
         if Demo.isActive { return true }
         #endif
         return subscriptions.isSubscribed
+        #endif
     }
 
     var body: some View {

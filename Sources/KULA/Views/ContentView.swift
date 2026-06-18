@@ -190,7 +190,7 @@ struct ContentView: View {
                 .scaledToFit()
                 .frame(width: 26, height: 26)
                 .clipShape(Circle())
-            Text("KÚLA")
+            Text("RUKK")
                 .font(.headline)
             Spacer()
         }

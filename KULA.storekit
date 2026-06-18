@@ -14,7 +14,7 @@
     {
       "id" : "A1B2C3D4-KULA-GROUP-0001",
       "localizations" : [],
-      "name" : "KÚLA",
+      "name" : "RUKK",
       "subscriptions" : [
         {
           "adHocOffers" : [],
@@ -30,14 +30,14 @@
           },
           "localizations" : [
             {
-              "description" : "Full access to KÚLA invoicing",
-              "displayName" : "KÚLA áskrift",
+              "description" : "Full access to RUKK invoicing",
+              "displayName" : "RUKK áskrift",
               "locale" : "en_US"
             }
           ],
           "productID" : "is.calmail.kula.yearly",
           "recurringSubscriptionPeriod" : "P1Y",
-          "referenceName" : "KÚLA Yearly",
+          "referenceName" : "RUKK Yearly",
           "subscriptionGroupID" : "A1B2C3D4-KULA-GROUP-0001",
           "type" : "RecurringSubscription",
           "winbackOffers" : []

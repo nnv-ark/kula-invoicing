@@ -22,7 +22,7 @@ struct PaywallView: View {
                 .clipShape(Circle())
                 .shadow(radius: 8, y: 4)
 
-            Text("KÚLA")
+            Text("RUKK")
                 .font(.largeTitle.weight(.bold))
                 .padding(.top, 12)
             Text("Reikningagerð fyrir íslensk fyrirtæki og verktaka")
