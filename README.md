@@ -1,4 +1,4 @@
-<h1 align="center">KÚLA</h1>
+<h1 align="center">RUKK</h1>
 
 <p align="center">
   A native macOS billing &amp; invoicing app for Icelandic businesses.<br>
@@ -14,12 +14,12 @@
 
 ---
 
-KÚLA is a focused, offline-first invoicing app. Your financial data stays on your Mac
+RUKK is a focused, offline-first invoicing app. Your financial data stays on your Mac
 (SwiftData / local store) — no accounts, no cloud, no tracking. The invoice layout follows
 the standard Icelandic format, and invoices can be exported as **PDF** or as a
 **TS-136 / PEPPOL BIS Billing 3.0** electronic invoice (UBL 2.1 XML).
 
-![KÚLA dashboard](docs/dashboard.png)
+![RUKK dashboard](docs/dashboard.png)
 
 ## Features
 
@@ -49,26 +49,26 @@ the standard Icelandic format, and invoices can be exported as **PDF** or as a
 Open the Xcode project and run:
 
 ```sh
-open KULA.xcodeproj
+open RUKK.xcodeproj
 ```
 
-Then select the **KULA** scheme and press **⌘R**.
+Then select the **RUKK** scheme and press **⌘R**.
 
 The same sources also build as a Swift package (used for the test suite):
 
 ```sh
-swift build      # compile the KULA library
+swift build      # compile the RUKK library
 swift test       # run the unit tests
 ```
 
-> The app entry point (`KULAApp.swift`) is excluded from the SwiftPM library target so the
+> The app entry point (`RUKKApp.swift`) is excluded from the SwiftPM library target so the
 > tests can link cleanly; the Xcode app target includes it.
 
 ## Project structure
 
 ```
-Sources/KULA/
-  KULAApp.swift          App entry point + menu commands
+Sources/RUKK/
+  RUKKApp.swift          App entry point + menu commands
   FocusedActions.swift   Menu-command plumbing (⌘N, ⌘P, export …)
   Models/                Invoice, LineItem, Contact, AppSettings (company), CustomStatus, Money
   Views/                 ContentView, Dashboard, invoice list/detail, customers, settings
@@ -76,7 +76,7 @@ Sources/KULA/
   PDF/                   PDF rendering, printing, Page Setup, Preview, email
   Export/                UBL/TS-136 XML exporter, batch exporter
   Import/                Contacts.app importer
-Tests/KULATests/         Invoice math, settings, and UBL export tests
+Tests/RUKKTests/         Invoice math, settings, and UBL export tests
 App/                     Assets, entitlements
 ```
 
@@ -90,7 +90,7 @@ App/                     Assets, entitlements
 
 ## Electronic invoicing (TS-136 / PEPPOL)
 
-KÚLA generates a UBL 2.1 invoice compliant with **PEPPOL BIS Billing 3.0** (the basis of the
+RUKK generates a UBL 2.1 invoice compliant with **PEPPOL BIS Billing 3.0** (the basis of the
 Icelandic TS-136 CIUS), with the Icelandic kennitala on EAS scheme `0196`. The XML document is
 produced locally; to *transmit* it over the PEPPOL network you still need a PEPPOL access point
 (e.g. a service provider) and a participant certificate.
@@ -107,4 +107,4 @@ Covers invoice/VAT math, per-company settings resolution, and UBL XML generation
 
 [MIT](LICENSE) © 2026 Ólafur H. Jónsson
 
-Invoice layout inspired by [Manta](https://github.com/hql287/Manta); KÚLA shares no source code with it.
+Invoice layout inspired by [Manta](https://github.com/hql287/Manta); RUKK shares no source code with it.

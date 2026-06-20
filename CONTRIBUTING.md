@@ -1,13 +1,13 @@
-# Contributing to KÚLA
+# Contributing to RUKK
 
-Thanks for your interest! KÚLA is a native macOS app written entirely in Swift.
+Thanks for your interest! RUKK is a native macOS app written entirely in Swift.
 
 ## Getting started
 
 ```sh
 git clone https://github.com/nnv-ark/kula-invoicing.git
 cd kula-invoicing
-open KULA.xcodeproj      # build & run with ⌘R
+open RUKK.xcodeproj      # build & run with ⌘R
 swift test               # run the unit tests
 ```
 
@@ -22,7 +22,7 @@ swift test               # run the unit tests
 - **Money is `Decimal`**, never `Double`. Totals are derived, not stored.
 - **No `try!` / `try?`** in production paths — handle or rethrow errors.
 - Keep views small; put logic in models/helpers where practical.
-- Add or update tests in `Tests/KULATests/` for any behaviour change to invoice math,
+- Add or update tests in `Tests/RUKKTests/` for any behaviour change to invoice math,
   settings resolution, or export.
 - Run `swift test` before opening a pull request — CI must stay green.
 

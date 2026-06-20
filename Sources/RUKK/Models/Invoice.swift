@@ -1,0 +1,186 @@
+import Foundation
+import SwiftData
+
+@Model
+final class Invoice {
+    var number: String = ""
+    var isNumberLocked: Bool = false    // fast raðnúmer eftir útgáfu (sjá issue())
+    var isCreditNote: Bool = false    // kreditreikningur (mótreikningur til leiðréttingar)
+    var creditedInvoiceNumber: String = ""  // númer upprunalega reikningsins sem er leiðréttur
+    var issueDate: Date = Date()
+    var dueDate: Date?                // Gjalddagi
+    var finalDueDate: Date?           // Eindagi (sjálfgefið gjalddagi + 5 dagar)
+    var paymentTermDays: Int?
+    var currencyCode: String = "ISK"
+    var taxRate: Decimal = 24         // sjálfgefið VSK fyrir nýjar línur
+    var isTaxInclusive: Bool = false
+    var discountAmount: Decimal = 0        // afsláttur, alltaf í prósentum (%)
+    var note: String = ""
+    var statusRaw: String = InvoiceStatus.draft.rawValue
+    var createdAt: Date = Date()
+    var templateName: String = "icelandic"
+    var collectionMethod: String = "Rafrænn reikningur"
+    var bookingDate: Date?            // Bókunardagur (sjálfgefið = issueDate)
+    var printedAt: Date?              // sett þegar reikningur er prentaður/fluttur út
+    var paidAt: Date?                 // sett þegar staða verður „Greitt" (fyrir greiðsluhraða)
+
+    var isPrinted: Bool { printedAt != nil }
+
+    var recipient: Contact?
+
+    /// Fyrirtækið sem gaf reikninginn út (fast við útgáfu svo gamlir reikningar breytast ekki).
+    var issuer: AppSettings?
+
+    @Relationship(deleteRule: .cascade, inverse: \LineItem.invoice)
+    var lineItems: [LineItem] = []
+
+    var status: InvoiceStatus {
+        get { InvoiceStatus(rawValue: statusRaw) ?? .draft }
+        set {
+            statusRaw = newValue.rawValue
+            if newValue == .paid {
+                if paidAt == nil { paidAt = .now }
+            } else {
+                paidAt = nil
+            }
+        }
+    }
+
+    /// Greiðsluhraði í dögum (frá útgáfu til greiðslu), ef greitt.
+    var paymentDays: Int? {
+        guard let paidAt else { return nil }
+        return Calendar.current.dateComponents([.day], from: issueDate, to: paidAt).day
+    }
+
+    init(number: String = "", currencyCode: String = "ISK", taxRate: Decimal = 0) {
+        self.number = number
+        self.currencyCode = currencyCode
+        self.taxRate = taxRate
+        self.issueDate = .now
+        self.createdAt = .now
+    }
+
+    /// Býr til, stillir og setur inn nýjan reikning fyrir tiltekið fyrirtæki.
+    /// Reikningsnúmer fyrirtækis: forskeyti + núll-fyllt 3-stafa númer (001, 002, …).
+    static func formattedNumber(prefix: String, _ n: Int) -> String {
+        "\(prefix)\(String(format: "%03d", n))"
+    }
+
+    @MainActor
+    static func makeNext(in context: ModelContext, company: AppSettings) -> Invoice {
+        // Drög fá EKKERT númer — raðnúmer er úthlutað fyrst við útgáfu (issue()),
+        // svo eytt drög brenna ekki númer og röðin verður gatalaus.
+        let invoice = Invoice(number: "",
+                              currencyCode: company.defaultCurrencyCode,
+                              taxRate: company.defaultTaxRate)
+        invoice.issuer = company
+        invoice.paymentTermDays = company.defaultPaymentTermDays
+        invoice.templateName = company.defaultTemplate
+        invoice.note = company.defaultNote
+        invoice.collectionMethod = company.collectionMethod
+        invoice.bookingDate = invoice.issueDate
+        if let term = invoice.paymentTermDays {
+            invoice.dueDate = Calendar.current.date(byAdding: .day, value: term, to: invoice.issueDate)
+        }
+        // finalDueDate er látið ósett (nil) — `effectiveFinalDueDate` reiknar sjálfgefið
+        // gjalddaga + sjálfgildi fyrirtækis þar til notandi sérstillir það.
+        context.insert(invoice)
+        return invoice
+    }
+
+    /// Hefur reikningurinn fengið fast útgáfunúmer?
+    var isIssued: Bool { isNumberLocked && !number.trimmingCharacters(in: .whitespaces).isEmpty }
+
+    /// Eindagi til notkunar: sérstilltur ef settur, annars gjalddagi (eða útgáfudagur)
+    /// + sjálfgildi fyrirtækis (5 dagar). Ein heimild fyrir ritil og reikningssnið.
+    var effectiveFinalDueDate: Date {
+        if let finalDueDate { return finalDueDate }
+        let base = dueDate ?? issueDate
+        let days = issuer?.defaultEindagiDays ?? 5
+        return Calendar.current.date(byAdding: .day, value: days, to: base) ?? base
+    }
+
+    /// Gefur reikninginn út: úthlutar næsta raðnúmeri fyrirtækisins (ef ekkert hefur þegar
+    /// verið slegið inn handvirkt), festir númerið og setur stöðu í „Sent“.
+    /// Kallast þegar ýtt er á „Gefa út reikning“ — í lok reikningsgerðar.
+    @MainActor
+    func issue() {
+        if number.trimmingCharacters(in: .whitespaces).isEmpty, let company = issuer {
+            number = Invoice.formattedNumber(prefix: company.invoiceNumberPrefix, company.nextInvoiceNumber)
+            company.nextInvoiceNumber += 1
+        }
+        isNumberLocked = true
+        if status == .draft { status = .sent }
+    }
+
+    /// Býr til kreditreikning (mótreikning) fyrir útgefinn reikning: afritar móttakanda og
+    /// línur með NEIKVÆÐU magni svo fjárhæðir verði til frádráttar. Fær eigið raðnúmer við útgáfu.
+    /// Leiðrétting útgefins reiknings skal gerð með kreditreikningi (reglug. 505/2013, 15. gr.).
+    @MainActor
+    static func makeCreditNote(for original: Invoice, in context: ModelContext) -> Invoice {
+        let credit = Invoice(number: "", currencyCode: original.currencyCode, taxRate: original.taxRate)
+        credit.issuer = original.issuer
+        credit.recipient = original.recipient
+        credit.isCreditNote = true
+        credit.creditedInvoiceNumber = original.number
+        credit.collectionMethod = original.collectionMethod
+        credit.discountAmount = original.discountAmount
+        credit.bookingDate = credit.issueDate
+        credit.dueDate = credit.issueDate
+        credit.finalDueDate = credit.issueDate
+        credit.note = "Kreditreikningur vegna reiknings nr. \(original.number)."
+        for item in original.orderedItems {
+            let li = LineItem(description: item.itemDescription,
+                              quantity: -item.quantity,
+                              unitPrice: item.unitPrice,
+                              taxRate: item.taxRate,
+                              order: item.order)
+            li.invoice = credit
+            credit.lineItems.append(li)
+            context.insert(li)
+        }
+        context.insert(credit)
+        return credit
+    }
+
+    // MARK: - Computed totals
+
+    var orderedItems: [LineItem] {
+        lineItems.sorted { $0.order < $1.order }
+    }
+
+    var subtotal: Decimal {                                  // samtals án VSK
+        lineItems.reduce(0) { $0 + $1.subtotal }
+    }
+
+    /// Afsláttur (prósenta af undirsamtölu) dreifist hlutfallslega á allar VSK-línur.
+    var discountValue: Decimal { subtotal * discountAmount / 100 }
+
+    /// Hlutfall verðs sem stendur eftir afslátt (1.0 = enginn afsláttur).
+    var discountFactor: Decimal { 1 - discountAmount / 100 }
+
+    var taxableBase: Decimal { subtotal - discountValue }   // skattstofn eftir afslátt
+
+    var taxValue: Decimal {                                  // heildar VSK á afsláttargrunni
+        vatBreakdown.reduce(0) { $0 + $1.tax }
+    }
+
+    var total: Decimal { taxableBase + taxValue }            // samtals með VSK
+
+    /// Línusamtölur (án VSK, FYRIR afslátt) flokkað eftir VSK-hlutfalli.
+    /// Notað fyrir skjals-afslátt í UBL (AllowanceCharge per skattflokk).
+    var lineNetByRate: [(rate: Decimal, net: Decimal)] {
+        Dictionary(grouping: lineItems, by: { $0.taxRate })
+            .map { rate, items in (rate, items.reduce(Decimal(0)) { $0 + $1.subtotal }) }
+            .sorted { $0.rate < $1.rate }
+    }
+
+    /// Sundurliðun VSK eftir hlutfalli, með afslátt dreginn frá grunni:
+    /// [(hlutfall%, skattstofn eftir afslátt, VSK upphæð)].
+    var vatBreakdown: [(rate: Decimal, base: Decimal, tax: Decimal)] {
+        lineNetByRate.map { rate, net in
+            let base = net * discountFactor
+            return (rate, base, base * rate / 100)
+        }
+    }
+}

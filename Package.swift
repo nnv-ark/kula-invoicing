@@ -2,15 +2,15 @@
 import PackageDescription
 
 let package = Package(
-    name: "KULA",
+    name: "RUKK",
     platforms: [.macOS(.v14)],
     products: [
-        .library(name: "KULA", targets: ["KULA"])
+        .library(name: "RUKK", targets: ["RUKK"])
     ],
     targets: [
-        // KULAApp.swift carries the @main entry point used only by the Xcode app
+        // RUKKApp.swift carries the @main entry point used only by the Xcode app
         // target; excluding it here keeps the SwiftPM library linkable into tests.
-        .target(name: "KULA", exclude: ["KULAApp.swift"]),
-        .testTarget(name: "KULATests", dependencies: ["KULA"])
+        .target(name: "RUKK", exclude: ["RUKKApp.swift"]),
+        .testTarget(name: "RUKKTests", dependencies: ["RUKK"])
     ]
 )

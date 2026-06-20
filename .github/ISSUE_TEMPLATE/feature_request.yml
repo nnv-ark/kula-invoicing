@@ -13,6 +13,6 @@ body:
     id: proposal
     attributes:
       label: Proposed solution
-      description: What would you like KÚLA to do?
+      description: What would you like RUKK to do?
     validations:
       required: false

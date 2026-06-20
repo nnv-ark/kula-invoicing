@@ -29,7 +29,7 @@ body:
   - type: input
     id: version
     attributes:
-      label: KÚLA version / commit
+      label: RUKK version / commit
       placeholder: "e.g. main @ 35aac1c"
     validations:
       required: false
