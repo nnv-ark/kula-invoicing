@@ -12,6 +12,7 @@ struct InvoiceDetailView: View {
 
     @State private var isShowingPreview = true
     @State private var showingCalendarImport = false
+    @State private var showingTymeImport = false
 
     // Pure read: útgáfufyrirtæki reikningsins, annars virkt, annars transient.
     // Aldrei breytt í context meðan á view-teikningu stendur.
@@ -118,6 +119,9 @@ struct InvoiceDetailView: View {
         }
         .sheet(isPresented: $showingCalendarImport) {
             CalendarImportView(invoice: invoice)
+        }
+        .sheet(isPresented: $showingTymeImport) {
+            TymeImportView(invoice: invoice)
         }
     }
 
@@ -231,6 +235,11 @@ struct InvoiceDetailView: View {
                     showingCalendarImport = true
                 } label: {
                     Label("Sækja úr dagatali", systemImage: "calendar")
+                }
+                Button {
+                    showingTymeImport = true
+                } label: {
+                    Label("Sækja úr Tyme", systemImage: "clock")
                 }
             }
             .disabled(invoice.isNumberLocked)
