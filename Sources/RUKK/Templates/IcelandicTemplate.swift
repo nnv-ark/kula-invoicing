@@ -69,34 +69,19 @@ struct IcelandicTemplate: View {
     // MARK: - Top header
 
     private var topHeader: some View {
-        HStack(alignment: .top) {
-            VStack(alignment: .leading, spacing: 4) {
-                if let data = settings.logoData, let img = NSImage(data: data) {
-                    // Lógó með stuttum texta miðjusettum undir því.
-                    VStack(alignment: .center, spacing: 4) {
-                        Image(nsImage: img)
-                            .resizable().scaledToFit()
-                            .frame(maxWidth: 140 * settings.logoScale,
-                                   maxHeight: 60 * settings.logoScale)
-                        if !settings.companyTagline.isEmpty {
-                            Text(settings.companyTagline)
-                                .font(.system(size: 8))
-                                .foregroundStyle(.secondary)
-                                .multilineTextAlignment(.center)
-                        }
-                    }
-                    .frame(width: 140 * settings.logoScale)
-                } else {
-                    Text(settings.companyName.isEmpty ? "FYRIRTÆKI" : settings.companyName.uppercased())
-                        .font(font(settings.headingFontSize, weight: .black))
-                    if !settings.companyTagline.isEmpty {
-                        Text(settings.companyTagline)
-                            .font(.system(size: 8))
-                            .foregroundStyle(.secondary)
-                    }
-                }
+        // Merki nær aldrei að miðju A4 (breidd) né gráu línunni (hæð) — stærri grunnur en áður.
+        let maxLogoW = min(200 * settings.logoScale, page.width / 2 - hPad - 24)
+        let maxLogoH = min(90 * settings.logoScale, 120)
+        return HStack(alignment: .top) {
+            if let data = settings.logoData, let img = NSImage(data: data) {
+                Image(nsImage: img)
+                    .resizable().scaledToFit()
+                    .frame(maxWidth: maxLogoW, maxHeight: maxLogoH, alignment: .topLeading)
+            } else {
+                Text(settings.companyName.isEmpty ? "FYRIRTÆKI" : settings.companyName.uppercased())
+                    .font(font(settings.headingFontSize, weight: .black))
             }
-            Spacer()
+            Spacer(minLength: 24)
             VStack(alignment: .trailing, spacing: 2) {
                 // Röð skv. mynd: nafn → kt. → heimilisfang+sími → netfang → reikningsnr. → VSK-númer
                 Text(settings.companyName).font(font(15, weight: .bold))

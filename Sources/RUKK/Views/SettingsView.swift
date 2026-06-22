@@ -150,11 +150,14 @@ private struct ProfileTab: View {
         Form {
             Section("Merki") {
                 LogoPicker(data: $settings.logoData)
+                Slider(value: $settings.logoScale, in: 0.5...3.0, step: 0.05) {
+                    Text("Stærð")
+                } minimumValueLabel: { Text("50%") } maximumValueLabel: { Text("300%") }
+                LabeledContent("Skali", value: "\(Int(settings.logoScale * 100))%")
             }
             Section("Auðkenni") {
                 TextField("Fullt nafn", text: $settings.fullName)
                 TextField("Fyrirtæki", text: $settings.companyName)
-                TextField("Stuttur texti undir merki", text: $settings.companyTagline)
                 TextField("Kennitala", text: $settings.companyNationalID)
                 TextField("VSK-númer", text: $settings.companyVATNumber)
                 TextField("Bankareikningur (Reikningsnr.)", text: $settings.bankAccountNumber)
@@ -315,13 +318,6 @@ private struct AppearanceTab: View {
                     Text("US Letter").tag("letter")
                 }
                 .pickerStyle(.radioGroup)
-            }
-
-            Section("Merki (logo)") {
-                Slider(value: $settings.logoScale, in: 0.5...3.0, step: 0.05) {
-                    Text("Stærð")
-                } minimumValueLabel: { Text("50%") } maximumValueLabel: { Text("300%") }
-                LabeledContent("Skali", value: "\(Int(settings.logoScale * 100))%")
             }
         }
         .formStyle(.grouped)

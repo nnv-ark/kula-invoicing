@@ -186,7 +186,7 @@ struct InvoiceDetailView: View {
 
             Section("Móttakandi") {
                 Picker("Viðskiptavinur", selection: $invoice.recipient) {
-                    Text("Enginn").tag(Optional<Contact>.none)
+                    Text("Velja").tag(Optional<Contact>.none)
                     ForEach(companyContacts) { Text($0.name).tag(Optional($0)) }
                 }
             }
