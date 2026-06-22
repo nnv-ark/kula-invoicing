@@ -10,6 +10,8 @@
 		3000000000000000000000A1 /* RUKKApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2000000000000000000000A1 /* RUKKApp.swift */; };
 		3000000000000000000000B7 /* FocusedActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2000000000000000000000B7 /* FocusedActions.swift */; };
 		3000000000000000000000E3 /* DemoSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2000000000000000000000E3 /* DemoSupport.swift */; };
+		3000000000000000000000E4 /* CalendarImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2000000000000000000000E4 /* CalendarImporter.swift */; };
+		3000000000000000000000E5 /* CalendarImportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2000000000000000000000E5 /* CalendarImportView.swift */; };
 		3000000000000000000000A2 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2000000000000000000000A2 /* AppSettings.swift */; };
 		3000000000000000000000A3 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2000000000000000000000A3 /* Contact.swift */; };
 		3000000000000000000000A4 /* Invoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2000000000000000000000A4 /* Invoice.swift */; };
@@ -39,6 +41,8 @@
 		2000000000000000000000A1 /* RUKKApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RUKKApp.swift; sourceTree = "<group>"; };
 		2000000000000000000000B7 /* FocusedActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusedActions.swift; sourceTree = "<group>"; };
 		2000000000000000000000E3 /* DemoSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoSupport.swift; sourceTree = "<group>"; };
+		2000000000000000000000E4 /* CalendarImporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarImporter.swift; sourceTree = "<group>"; };
+		2000000000000000000000E5 /* CalendarImportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarImportView.swift; sourceTree = "<group>"; };
 		2000000000000000000000A2 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		2000000000000000000000A3 /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		2000000000000000000000A4 /* Invoice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Invoice.swift; sourceTree = "<group>"; };
@@ -118,6 +122,7 @@
 				2000000000000000000000A1 /* RUKKApp.swift */,
 				2000000000000000000000B7 /* FocusedActions.swift */,
 				2000000000000000000000E3 /* DemoSupport.swift */,
+				2000000000000000000000E4 /* CalendarImporter.swift */,
 				1000000000000000000000D5 /* Models */,
 				1000000000000000000000D6 /* Views */,
 				1000000000000000000000D7 /* Templates */,
@@ -152,6 +157,7 @@
 				2000000000000000000000AE /* InvoiceDetailView.swift */,
 				2000000000000000000000AF /* InvoiceListView.swift */,
 				2000000000000000000000B0 /* SettingsView.swift */,
+				2000000000000000000000E5 /* CalendarImportView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -264,6 +270,8 @@
 				3000000000000000000000A1 /* RUKKApp.swift in Sources */,
 				3000000000000000000000B7 /* FocusedActions.swift in Sources */,
 				3000000000000000000000E3 /* DemoSupport.swift in Sources */,
+				3000000000000000000000E4 /* CalendarImporter.swift in Sources */,
+				3000000000000000000000E5 /* CalendarImportView.swift in Sources */,
 				3000000000000000000000A2 /* AppSettings.swift in Sources */,
 				3000000000000000000000B4 /* CustomStatus.swift in Sources */,
 				3000000000000000000000A3 /* Contact.swift in Sources */,
@@ -406,6 +414,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = RUKK;
 				INFOPLIST_KEY_CFBundleName = RUKK;
+				INFOPLIST_KEY_NSCalendarsFullAccessUsageDescription = "RUKK les atburði úr Dagatali svo þú getir breytt unnum tíma í reikningslínur.";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.business";
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "© 2026 NNV.ehf";
@@ -433,6 +442,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = RUKK;
 				INFOPLIST_KEY_CFBundleName = RUKK;
+				INFOPLIST_KEY_NSCalendarsFullAccessUsageDescription = "RUKK les atburði úr Dagatali svo þú getir breytt unnum tíma í reikningslínur.";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.business";
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "© 2026 NNV.ehf";

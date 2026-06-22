@@ -11,6 +11,7 @@ struct InvoiceDetailView: View {
     @AppStorage("activeCompanyID") private var activeCompanyID = ""
 
     @State private var isShowingPreview = true
+    @State private var showingCalendarImport = false
 
     // Pure read: útgáfufyrirtæki reikningsins, annars virkt, annars transient.
     // Aldrei breytt í context meðan á view-teikningu stendur.
@@ -114,6 +115,9 @@ struct InvoiceDetailView: View {
         }
         .focusedSceneValue(\.exportXML) {
             UBLInvoiceExporter.export(invoice: invoice, company: settings)
+        }
+        .sheet(isPresented: $showingCalendarImport) {
+            CalendarImportView(invoice: invoice)
         }
     }
 
@@ -222,6 +226,11 @@ struct InvoiceDetailView: View {
                     context.insert(item)
                 } label: {
                     Label("Bæta við línu", systemImage: "plus")
+                }
+                Button {
+                    showingCalendarImport = true
+                } label: {
+                    Label("Sækja úr dagatali", systemImage: "calendar")
                 }
             }
             .disabled(invoice.isNumberLocked)
