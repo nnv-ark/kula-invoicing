@@ -9,6 +9,7 @@ enum SidebarItem: Hashable {
 
 struct ContentView: View {
     @Environment(\.modelContext) private var context
+    @Environment(ImportInbox.self) private var inbox
     @Query(sort: \AppSettings.companyName) private var companies: [AppSettings]
     @AppStorage("activeCompanyID") private var activeCompanyID = ""
     @AppStorage("kulaNormalizedV1") private var didNormalize = false
@@ -99,6 +100,13 @@ struct ContentView: View {
             selectedInvoice = nil   // gögn annars fyrirtækis eiga ekki að haldast valin
             selectedContact = nil
         }
+        .onChange(of: inbox.pending) { _, payload in
+            if let payload { importInvoice(payload) }
+        }
+        .task {
+            // Reikningur sem barst um rukk:// áður en viðmótið var tilbúið.
+            if let payload = inbox.pending { importInvoice(payload) }
+        }
         .focusedSceneValue(\.newInvoice, createInvoice)
     }
 
@@ -155,6 +163,29 @@ struct ContentView: View {
         let invoice = Invoice.makeNext(in: context, company: company)
         selection = .invoices
         selectedInvoice = invoice
+    }
+
+    /// Býr til drög-reikning úr gögnum sem bárust um `rukk://` (t.d. úr Tyme-viðbót) og opnar hann.
+    private func importInvoice(_ payload: InvoiceImportPayload) {
+        let company = AppSettings.active(in: context, activeID: activeCompanyID)
+        let invoice = Invoice.makeNext(in: context, company: company)
+        if let customer = payload.customer?.trimmingCharacters(in: .whitespacesAndNewlines),
+           !customer.isEmpty {
+            invoice.note = "Verkefni: \(customer)"
+        }
+        for (i, line) in payload.lines.enumerated() {
+            let item = LineItem(description: line.description,
+                                quantity: line.quantity,
+                                unitPrice: line.unitPrice,
+                                taxRate: invoice.taxRate,
+                                order: i)
+            item.invoice = invoice
+            invoice.lineItems.append(item)
+            context.insert(item)
+        }
+        selection = .invoices
+        selectedInvoice = invoice
+        inbox.pending = nil
     }
 
     private var activeCompany: AppSettings? {
@@ -248,5 +279,6 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
+        .environment(ImportInbox())
         .modelContainer(for: [Invoice.self, LineItem.self, Contact.self, AppSettings.self, CustomStatus.self], inMemory: true)
 }

@@ -61,6 +61,8 @@ struct RUKKApp: App {
 /// Sýnir aðalviðmótið ef áskrift er virk, annars áskriftarskjáinn.
 struct RootView: View {
     @State private var subscriptions = SubscriptionStore()
+    /// Reikningur sem berst utanfrá um `rukk://` (t.d. úr Tyme) bíður hér uns viðmótið er tilbúið.
+    @State private var inbox = ImportInbox()
     /// DEBUG-only: leyfir að sleppa paywall við prófun (aldrei lesið í App Store-byggingum).
     @AppStorage("debugUnlocked") private var debugUnlocked = false
 
@@ -102,6 +104,12 @@ struct RootView: View {
             }
         }
         .environment(subscriptions)
+        .environment(inbox)
+        .onOpenURL { url in
+            if let payload = InvoiceImport.payload(from: url) {
+                inbox.pending = payload
+            }
+        }
     }
 }
 
