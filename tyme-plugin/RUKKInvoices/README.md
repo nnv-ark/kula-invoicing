@@ -4,6 +4,10 @@ Sends tracked time from [Tyme](https://www.tyme-app.com) straight into **RUKK** 
 draft invoice, using RUKK's custom `rukk://` URL scheme. Fully offline — the data is
 handed directly to the RUKK app on the same Mac; nothing is uploaded anywhere.
 
+**Requires the RUKK app** (invoicing for small Icelandic businesses), free on the
+Mac App Store: https://apps.apple.com/app/id6777342177 — version 1.2 or later, which
+registers the `rukk://` URL scheme this plugin hands off to.
+
 ## How it works
 
 1. In Tyme, open **Share / Export** and choose **RUKK**.
