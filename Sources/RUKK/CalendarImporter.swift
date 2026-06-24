@@ -21,9 +21,11 @@ struct BillableEvent: Identifiable {
 
 /// Les atburði úr Dagatali (EventKit) til að breyta í reikningslínur.
 /// Krefst `com.apple.security.personal-information.calendars` + NSCalendarsFullAccessUsageDescription.
-@MainActor
 enum CalendarImporter {
-    static let store = EKEventStore()
+    /// EKEventStore er ekki `Sendable` í eldri SDK-um (CI keyrir Swift 6.1). EventKit
+    /// höndlar sína eigin samhæfingu, svo við merkjum eintakið `nonisolated(unsafe)`
+    /// til að forðast „sending non-Sendable value“ við `requestFullAccessToEvents()`.
+    nonisolated(unsafe) static let store = EKEventStore()
 
     static func authorizationStatus() -> EKAuthorizationStatus {
         EKEventStore.authorizationStatus(for: .event)
