@@ -258,6 +258,10 @@ private struct InvoiceTab: View {
                     Text("Miðlungs").tag("medium")
                     Text("Langt").tag("long")
                 }
+                Picker("Reikningssnið", selection: $settings.defaultTemplate) {
+                    Text("Íslenskt (reglug. 505/2013)").tag("icelandic")
+                    Text("Universal (enska)").tag("universal")
+                }
             }
             Section("Númerakerfi") {
                 TextField("Forskeyti", text: $settings.invoiceNumberPrefix)

@@ -1519,6 +1519,18 @@
     "Atburður" : {
       "extractionState" : "manual",
       "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Event" } } }
+    },
+    "Reikningssnið" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Invoice template" } } }
+    },
+    "Íslenskt (reglug. 505/2013)" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Icelandic (reg. 505/2013)" } } }
+    },
+    "Universal (enska)" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Universal (English)" } } }
     }
   },
   "version" : "1.0"

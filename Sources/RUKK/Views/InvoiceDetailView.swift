@@ -161,6 +161,11 @@ struct InvoiceDetailView: View {
                 Picker("Staða", selection: $invoice.status) {
                     ForEach(InvoiceStatus.allCases) { Text($0.label).tag($0) }
                 }
+                Picker("Reikningssnið", selection: $invoice.templateName) {
+                    Text("Íslenskt (reglug. 505/2013)").tag("icelandic")
+                    Text("Universal (enska)").tag("universal")
+                }
+                .disabled(invoice.isNumberLocked)
                 if invoice.status == .paid {
                     DatePicker("Greitt þann",
                                selection: Binding(
