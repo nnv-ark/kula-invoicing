@@ -17,6 +17,9 @@ struct IcelandicTemplate: View {
     private var page: CGSize { Self.pageSize(settings.paperSize) }
     private var textColor: Color { Color(hex: settings.textColorHex) ?? .black }
 
+    /// Textar reikningsins á völdu reikningsmáli (óháð viðmótsmáli).
+    private var s: InvoiceStrings { InvoiceStrings(.from(settings.invoiceLanguage)) }
+
     private func font(_ size: Double, weight: Font.Weight = .regular) -> Font {
         if settings.fontName.isEmpty {
             .system(size: size, weight: weight)
@@ -78,7 +81,7 @@ struct IcelandicTemplate: View {
                     .resizable().scaledToFit()
                     .frame(maxWidth: maxLogoW, maxHeight: maxLogoH, alignment: .topLeading)
             } else {
-                Text(settings.companyName.isEmpty ? "FYRIRTÆKI" : settings.companyName.uppercased())
+                Text(settings.companyName.isEmpty ? s.companyPlaceholder : settings.companyName.uppercased())
                     .font(font(settings.headingFontSize, weight: .black))
             }
             Spacer(minLength: 24)
@@ -86,11 +89,11 @@ struct IcelandicTemplate: View {
                 // Röð skv. mynd: nafn → kt. → heimilisfang+sími → netfang → reikningsnr. → VSK-númer
                 Text(settings.companyName).font(font(15, weight: .bold))
                 if !settings.companyNationalID.isEmpty {
-                    Text("kt. \(settings.companyNationalID)")
+                    Text(s.idNo(settings.companyNationalID))
                 }
 
                 let addrLine = [settings.companyAddress.replacingOccurrences(of: "\n", with: ", "),
-                                settings.companyPhone.isEmpty ? nil : "Sími: \(settings.companyPhone)"]
+                                settings.companyPhone.isEmpty ? nil : s.phone(settings.companyPhone)]
                     .compactMap { ($0?.isEmpty == false) ? $0 : nil }
                     .joined(separator: ", ")
                 if !addrLine.isEmpty {
@@ -100,10 +103,10 @@ struct IcelandicTemplate: View {
                     Text(settings.companyEmail).padding(.top, 6)
                 }
                 if !settings.bankAccountNumber.isEmpty {
-                    Text("Reikningsnr: \(settings.bankAccountNumber)").padding(.top, 6)
+                    Text(s.bankAccount(settings.bankAccountNumber)).padding(.top, 6)
                 }
                 if !settings.companyVATNumber.isEmpty {
-                    Text("VSK númer: \(settings.companyVATNumber)")
+                    Text(s.vatNumber(settings.companyVATNumber))
                 }
             }
         }
@@ -117,21 +120,21 @@ struct IcelandicTemplate: View {
                 if let r = invoice.recipient {
                     Text(r.company.isEmpty ? r.name : r.company)
                     Text(r.address)
-                    if !r.nationalID.isEmpty { Text("kt. \(r.nationalID)") }
+                    if !r.nationalID.isEmpty { Text(s.idNo(r.nationalID)) }
                 }
             }
             Spacer(minLength: 80)
             VStack(alignment: .leading, spacing: 3) {
-                metaRow(invoice.isCreditNote ? "Kreditreikningur nr." : "Reikningur nr.", invoice.number, boldLabel: true)
+                metaRow(invoice.isCreditNote ? s.creditNoteNo : s.invoiceNo, invoice.number, boldLabel: true)
                 if invoice.isCreditNote && !invoice.creditedInvoiceNumber.isEmpty {
-                    metaRow("Vegna reiknings nr.", invoice.creditedInvoiceNumber)
+                    metaRow(s.creditReason, invoice.creditedInvoiceNumber)
                 }
-                metaRow("Viðskiptanúmer", invoice.recipient?.nationalID ?? "")
-                metaRow("Útgáfudagur", date(invoice.issueDate))
-                metaRow("Bókunardagur", date(invoice.bookingDate ?? invoice.issueDate))
-                metaRow("Gjalddagi", date(invoice.dueDate ?? invoice.issueDate))
-                metaRow("Eindagi", date(invoice.effectiveFinalDueDate))
-                metaRow("Innh.máti", invoice.collectionMethod)
+                metaRow(s.customerNo, invoice.recipient?.nationalID ?? "")
+                metaRow(s.issueDate, date(invoice.issueDate))
+                metaRow(s.bookingDate, date(invoice.bookingDate ?? invoice.issueDate))
+                metaRow(s.dueDate, date(invoice.dueDate ?? invoice.issueDate))
+                metaRow(s.finalDueDate, date(invoice.effectiveFinalDueDate))
+                metaRow(s.collectionMethod, invoice.collectionMethod)
             }
             .frame(width: 260)
         }
@@ -145,25 +148,20 @@ struct IcelandicTemplate: View {
         }
     }
 
-    private func date(_ d: Date) -> String {
-        let f = DateFormatter()
-        f.locale = Locale(identifier: "is_IS")
-        f.dateFormat = "d.M.yyyy"
-        return f.string(from: d)
-    }
+    private func date(_ d: Date) -> String { s.date(d) }
 
     // MARK: - Items table
 
     private var itemsTable: some View {
         VStack(spacing: 0) {
             HStack(alignment: .bottom, spacing: 8) {
-                col("Lýsing", width: nil, align: .leading).bold()
-                col("Magn", width: 50, align: .trailing).bold()
-                colTwoLine("Upphæð", "(án VSK)", width: 60).bold()
-                colTwoLine("Upphæð", "(með VSK)", width: 60).bold()
-                col("VSK", width: 40, align: .trailing).bold()
-                colTwoLine("Samtals", "(án VSK)", width: 75).bold()
-                colTwoLine("Samtals", "(með VSK)", width: 75).bold()
+                col(s.itemDescription, width: nil, align: .leading).bold()
+                col(s.quantity, width: 50, align: .trailing).bold()
+                colTwoLine(s.amount, s.exclVAT, width: 60).bold()
+                colTwoLine(s.amount, s.inclVAT, width: 60).bold()
+                col(s.vat, width: 40, align: .trailing).bold()
+                colTwoLine(s.total, s.exclVAT, width: 75).bold()
+                colTwoLine(s.total, s.inclVAT, width: 75).bold()
             }
             .padding(.bottom, 6)
 
@@ -207,20 +205,20 @@ struct IcelandicTemplate: View {
         HStack(alignment: .top) {
             Spacer()
             VStack(alignment: .trailing, spacing: 5) {
-                tRow("Samtals án VSK", currency(invoice.subtotal))
+                tRow(s.subtotalExclVAT, currency(invoice.subtotal))
                 if invoice.discountValue > 0 {
                     tRow(discountLabel, "-" + currency(invoice.discountValue))
-                    tRow("Skattstofn", currency(invoice.taxableBase))
+                    tRow(s.taxableBase, currency(invoice.taxableBase))
                 }
-                tRow("VSK", currency(invoice.taxValue))
-                tRow("Samtals með VSK", currency(invoice.total), bold: true)
+                tRow(s.vat, currency(invoice.taxValue))
+                tRow(s.totalInclVAT, currency(invoice.total), bold: true)
             }
             .frame(width: 260)
         }
     }
 
     private var discountLabel: String {
-        "Afsláttur (\(amount(invoice.discountAmount))%)"
+        s.discountLabel(amount(invoice.discountAmount))
     }
 
     private func tRow(_ label: String, _ value: String, bold: Bool = false) -> some View {
@@ -236,7 +234,7 @@ struct IcelandicTemplate: View {
 
     private var notesView: some View {
         VStack(alignment: .leading, spacing: 3) {
-            Text("Athugasemdir").bold()
+            Text(s.notes).bold()
             Text(invoice.note)
                 .fixedSize(horizontal: false, vertical: true)
         }
@@ -247,7 +245,7 @@ struct IcelandicTemplate: View {
 
     private var footer: some View {
         HStack(alignment: .bottom) {
-            Text("Þessi reikningur er rafrænt ytra frumgagn skv. reglugerð nr. 505/2013. Rafrænt ytra frumgagn reiknings telst frumrit hans.")
+            Text(s.footerLegal)
                 .fixedSize(horizontal: false, vertical: true)
             Spacer(minLength: 16)
             Text(invoice.number).bold()
@@ -257,15 +255,7 @@ struct IcelandicTemplate: View {
 
     // MARK: - Formatting
 
-    private func amount(_ d: Decimal) -> String {
-        let f = NumberFormatter()
-        f.locale = Locale(identifier: "is_IS")
-        f.numberStyle = .decimal
-        f.maximumFractionDigits = 0
-        return f.string(from: d as NSDecimalNumber) ?? "\(d)"
-    }
+    private func amount(_ d: Decimal) -> String { s.amountString(d) }
 
-    private func currency(_ d: Decimal) -> String {
-        amount(d) + " kr."
-    }
+    private func currency(_ d: Decimal) -> String { s.currency(d) }
 }

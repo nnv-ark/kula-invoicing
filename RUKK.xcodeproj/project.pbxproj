@@ -36,6 +36,8 @@
 		3000000000000000000000B0 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2000000000000000000000B0 /* SettingsView.swift */; };
 		3000000000000000000000B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2000000000000000000000B1 /* Assets.xcassets */; };
 		3000000000000000000000C0 /* RUKK.icon in Resources */ = {isa = PBXBuildFile; fileRef = 2000000000000000000000C0 /* RUKK.icon */; };
+		3000000000000000000000F0 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 2000000000000000000000F0 /* Localizable.xcstrings */; };
+		3000000000000000000000F1 /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2000000000000000000000F1 /* Localization.swift */; };
 		3000000000000000000000B4 /* CustomStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2000000000000000000000B4 /* CustomStatus.swift */; };
 		3000000000000000000000B5 /* IcelandicTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2000000000000000000000B5 /* IcelandicTemplate.swift */; };
 /* End PBXBuildFile section */
@@ -71,6 +73,8 @@
 		2000000000000000000000B1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2000000000000000000000B2 /* RUKK.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RUKK.entitlements; sourceTree = "<group>"; };
 		2000000000000000000000C0 /* RUKK.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = RUKK.icon; sourceTree = "<group>"; };
+		2000000000000000000000F0 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		2000000000000000000000F1 /* Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localization.swift; sourceTree = "<group>"; };
 		2000000000000000000000B3 /* RUKK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RUKK.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2000000000000000000000B4 /* CustomStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomStatus.swift; sourceTree = "<group>"; };
 		2000000000000000000000B5 /* IcelandicTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IcelandicTemplate.swift; sourceTree = "<group>"; };
@@ -110,6 +114,7 @@
 				2000000000000000000000B1 /* Assets.xcassets */,
 				2000000000000000000000C0 /* RUKK.icon */,
 				2000000000000000000000B2 /* RUKK.entitlements */,
+				2000000000000000000000F0 /* Localizable.xcstrings */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -126,6 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				2000000000000000000000A1 /* RUKKApp.swift */,
+				2000000000000000000000F1 /* Localization.swift */,
 				2000000000000000000000B7 /* FocusedActions.swift */,
 				2000000000000000000000E3 /* DemoSupport.swift */,
 				2000000000000000000000E4 /* CalendarImporter.swift */,
@@ -243,9 +249,10 @@
 			};
 			buildConfigurationList = 1000000000000000000000F1 /* Build configuration list for PBXProject "RUKK" */;
 			compatibilityVersion = "Xcode 15.0";
-			developmentRegion = en;
+			developmentRegion = is;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				is,
 				en,
 				Base,
 			);
@@ -266,6 +273,7 @@
 			files = (
 				3000000000000000000000B1 /* Assets.xcassets in Resources */,
 				3000000000000000000000C0 /* RUKK.icon in Resources */,
+				3000000000000000000000F0 /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -277,6 +285,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3000000000000000000000A1 /* RUKKApp.swift in Sources */,
+				3000000000000000000000F1 /* Localization.swift in Sources */,
 				3000000000000000000000B7 /* FocusedActions.swift in Sources */,
 				3000000000000000000000E3 /* DemoSupport.swift in Sources */,
 				3000000000000000000000E4 /* CalendarImporter.swift in Sources */,
@@ -358,7 +367,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 6.0;
@@ -404,7 +413,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				SDKROOT = macosx;
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_VERSION = 6.0;
 			};

@@ -29,6 +29,7 @@ final class AppSettings {
     var defaultTemplate: String = "icelandic"
     var defaultNote: String = ""
     var dateFormat: String = "medium"  // short | medium | long
+    var invoiceLanguage: String = "is" // tungumál reikningsins (is | en) — óháð viðmótsmáli
 
     // Tölvupóstur til viðskiptavinar — sniðmát. {nafn}, {númer} og {fyrirtæki} eru útfyllt sjálfkrafa.
     var emailSubject: String = "Reikningur {númer} frá {fyrirtæki}"

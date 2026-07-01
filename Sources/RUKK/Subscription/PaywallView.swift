@@ -16,7 +16,7 @@ struct PaywallView: View {
         return "Útgáfa \(version) (\(build))  ·  © 2026 NNV.ehf"
     }
 
-    private let features: [(icon: String, text: String)] = [
+    private let features: [(icon: String, text: LocalizedStringKey)] = [
         ("building.2", "Mörg fyrirtæki? Ekkert mál! Auðvelt að skipta á milli — og kostar ekki aukalega."),
         ("chart.bar.xaxis", "Mælaborð: sala, innheimt, útistandandi og greiðsluhraði — meiri upplýsingar á leiðinni."),
         ("arrow.up.doc", "XML-stuðningur og auðvelt að flytja allt út í einu.")
@@ -41,7 +41,7 @@ struct PaywallView: View {
                 .multilineTextAlignment(.center)
 
             VStack(alignment: .leading, spacing: 14) {
-                ForEach(features, id: \.text) { feature in
+                ForEach(features, id: \.icon) { feature in
                     Label {
                         Text(feature.text)
                     } icon: {

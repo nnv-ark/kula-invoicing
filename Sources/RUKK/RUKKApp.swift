@@ -7,8 +7,16 @@ let appLog = Logger(subsystem: "is.calmail.kula", category: "app")
 @main
 struct RUKKApp: App {
     let container: ModelContainer
+    /// Tungumál viðmótsins — óháð tungumáli reikninga (sjá Stillingar → Tungumál).
+    @AppStorage("uiLanguage") private var uiLanguage: String = AppLanguage.icelandic.rawValue
 
     init() {
+        // Bundle.main velur á milli is.lproj/en.lproj eftir „AppleLanguages“, ekki eftir
+        // SwiftUI-umhverfi — samstillt við hvert ræsingu svo viðmótið fylgi ávallt
+        // valinu í Stillingar → Tungumál, óháð kerfismáli macOS.
+        let uiLang = UserDefaults.standard.string(forKey: "uiLanguage") ?? AppLanguage.icelandic.rawValue
+        UserDefaults.standard.set([uiLang], forKey: "AppleLanguages")
+
         do {
             #if DEBUG
             // Demó-ham keyrir á in-memory grunni svo sýnigögn snerti ekki raunveruleg gögn.
@@ -47,12 +55,14 @@ struct RUKKApp: App {
         // `.contentSize` sjálfgefið sem gerir hann erfiðan að stækka/minnka.
         .windowResizability(.contentMinSize)
         .commands { RUKKCommands() }
+        .environment(\.locale, AppLanguage.from(uiLanguage).locale)
 
         Settings {
             SettingsView()
                 .modelContainer(container)
         }
         .defaultSize(width: 640, height: 760)
+        .environment(\.locale, AppLanguage.from(uiLanguage).locale)
     }
 }
 

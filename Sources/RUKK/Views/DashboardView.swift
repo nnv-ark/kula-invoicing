@@ -56,7 +56,7 @@ struct DashboardView: View {
         }
     }
 
-    private func kpi(_ title: String, _ value: String, _ icon: String, _ tint: Color = .accentColor) -> some View {
+    private func kpi(_ title: LocalizedStringKey, _ value: String, _ icon: String, _ tint: Color = .accentColor) -> some View {
         VStack(alignment: .leading, spacing: 6) {
             Label(title, systemImage: icon)
                 .font(.caption).foregroundStyle(.secondary).labelStyle(.titleAndIcon)
@@ -68,7 +68,7 @@ struct DashboardView: View {
         .background(.quaternary.opacity(0.4), in: RoundedRectangle(cornerRadius: 10))
     }
 
-    private func card<Content: View>(_ title: String, @ViewBuilder _ content: () -> Content) -> some View {
+    private func card<Content: View>(_ title: LocalizedStringKey, @ViewBuilder _ content: () -> Content) -> some View {
         VStack(alignment: .leading, spacing: 10) {
             Text(title).font(.headline)
             content()

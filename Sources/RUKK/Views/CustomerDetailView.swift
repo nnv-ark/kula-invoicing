@@ -99,7 +99,7 @@ struct CustomerDetailView: View {
         .padding(.vertical, 4)
     }
 
-    private func kpi(_ title: String, _ value: String, _ icon: String, _ tint: Color = .accentColor) -> some View {
+    private func kpi(_ title: LocalizedStringKey, _ value: String, _ icon: String, _ tint: Color = .accentColor) -> some View {
         VStack(alignment: .leading, spacing: 6) {
             Label(title, systemImage: icon)
                 .font(.caption)

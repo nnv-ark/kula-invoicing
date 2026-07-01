@@ -136,6 +136,9 @@ private struct SettingsTabs: View {
 
             StatusesTab()
                 .tabItem { Label("Stöður", systemImage: "tag") }
+
+            LanguageTab(settings: settings)
+                .tabItem { Label("Tungumál", systemImage: "globe") }
         }
         .padding()
     }
@@ -321,6 +324,73 @@ private struct AppearanceTab: View {
             }
         }
         .formStyle(.grouped)
+    }
+}
+
+// MARK: - Language
+
+/// Tvö óháð tungumálaval: viðmótið (allt forritið) og reikningurinn (þetta fyrirtæki).
+/// Þannig má t.d. keyra enskt viðmót en gefa út íslenska reikninga.
+private struct LanguageTab: View {
+    @Bindable var settings: AppSettings
+    @AppStorage("uiLanguage") private var uiLanguage: String = AppLanguage.icelandic.rawValue
+    @State private var needsRestart = false
+
+    var body: some View {
+        Form {
+            Section {
+                Picker("Viðmót", selection: $uiLanguage) {
+                    ForEach(AppLanguage.allCases) { lang in
+                        Text(lang.displayName).tag(lang.rawValue)
+                    }
+                }
+                .pickerStyle(.radioGroup)
+                .onChange(of: uiLanguage) { _, newValue in
+                    // macOS velur is.lproj/en.lproj eftir „AppleLanguages“ við ræsingu —
+                    // breytingin krefst því endurræsingar til að taka gildi alls staðar.
+                    UserDefaults.standard.set([newValue], forKey: "AppleLanguages")
+                    needsRestart = true
+                }
+
+                if needsRestart {
+                    HStack {
+                        Label("Endurræstu RUKK til að breytingin taki gildi alls staðar.", systemImage: "arrow.clockwise")
+                            .font(.caption)
+                            .foregroundStyle(.orange)
+                        Spacer()
+                        Button("Endurræsa núna", action: relaunch)
+                    }
+                }
+            } header: {
+                Text("Tungumál viðmóts")
+            } footer: {
+                Text("Ræður tungumáli valmynda, hnappa og texta í RUKK sjálfu.")
+            }
+
+            Section {
+                Picker("Reikningur", selection: $settings.invoiceLanguage) {
+                    ForEach(AppLanguage.allCases) { lang in
+                        Text(lang.displayName).tag(lang.rawValue)
+                    }
+                }
+                .pickerStyle(.radioGroup)
+            } header: {
+                Text("Tungumál reiknings")
+            } footer: {
+                Text("Ræður tungumáli á PDF-reikningum þessa fyrirtækis — óháð tungumáli viðmóts að ofan. Tekur gildi samstundis, engin endurræsing þörf.")
+            }
+        }
+        .formStyle(.grouped)
+    }
+
+    /// Ræsir nýtt eintak af RUKK og lokar núverandi — eina leiðin til að láta
+    /// macOS endurmeta hvaða `.lproj` möppu skal nota fyrir viðmótið.
+    private func relaunch() {
+        let task = Process()
+        task.executableURL = URL(fileURLWithPath: "/usr/bin/open")
+        task.arguments = ["-n", Bundle.main.bundleURL.path]
+        try? task.run()
+        NSApplication.shared.terminate(nil)
     }
 }
 
