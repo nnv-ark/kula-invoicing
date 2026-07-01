@@ -17,8 +17,8 @@ enum BatchExporter {
         panel.canChooseDirectories = true
         panel.canChooseFiles = false
         panel.canCreateDirectories = true
-        panel.prompt = "Flytja út"
-        panel.message = "Veldu möppu fyrir reikningsskrár (\(invoices.count) reikningar)"
+        panel.prompt = String(localized: "Flytja út")
+        panel.message = "\(String(localized: "Veldu möppu fyrir reikningsskrár")) (\(invoices.count) \(String(localized: "reikningar")))"
         guard panel.runModal() == .OK, let dir = panel.url else { return }
 
         var written = 0
@@ -66,10 +66,14 @@ enum BatchExporter {
     private static func showSummary(written: Int, failed: Int, folder: URL) {
         let alert = NSAlert()
         alert.alertStyle = failed == 0 ? .informational : .warning
-        alert.messageText = failed == 0 ? "Útflutningur tókst" : "Útflutningi lokið með villum"
-        alert.informativeText = "Skrifaðar skrár: \(written)" + (failed > 0 ? "\nMistókust: \(failed)" : "")
-        alert.addButton(withTitle: "Opna möppu")
-        alert.addButton(withTitle: "Í lagi")
+        alert.messageText = failed == 0
+            ? String(localized: "Útflutningur tókst")
+            : String(localized: "Útflutningi lokið með villum")
+        var info = "\(String(localized: "Skrifaðar skrár:")) \(written)"
+        if failed > 0 { info += "\n\(String(localized: "Mistókust:")) \(failed)" }
+        alert.informativeText = info
+        alert.addButton(withTitle: String(localized: "Opna möppu"))
+        alert.addButton(withTitle: String(localized: "Í lagi"))
         if alert.runModal() == .alertFirstButtonReturn {
             NSWorkspace.shared.open(folder)
         }

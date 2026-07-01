@@ -72,7 +72,7 @@ struct CustomerDetailView: View {
                     Label("Nýr reikningur", systemImage: "doc.badge.plus")
                 }
                 .disabled(contact.owner == nil)
-                .help("Nýr reikningur fyrir \(contact.name.isEmpty ? "þennan viðskiptavin" : contact.name)")
+                .help("\(String(localized: "Nýr reikningur fyrir")) \(contact.name.isEmpty ? String(localized: "þennan viðskiptavin") : contact.name)")
             }
         }
     }
@@ -122,8 +122,8 @@ struct CustomerDetailView: View {
     private var yearChart: some View {
         Chart(yearly, id: \.year) { item in
             BarMark(
-                x: .value("Ár", String(item.year)),
-                y: .value("Upphæð", item.totalDouble)
+                x: .value(String(localized: "Ár"), String(item.year)),
+                y: .value(String(localized: "Upphæð"), item.totalDouble)
             )
             .foregroundStyle(.tint)
             .annotation(position: .top) {
@@ -168,7 +168,7 @@ struct CustomerDetailView: View {
         let days = invoices.compactMap(\.paymentDays)
         guard !days.isEmpty else { return "—" }
         let avg = Double(days.reduce(0, +)) / Double(days.count)
-        return "\(Int(avg.rounded())) dagar"
+        return "\(Int(avg.rounded())) \(String(localized: "dagar"))"
     }
 
     private struct YearTotal { let year: Int; let total: Decimal; var totalDouble: Double { (total as NSDecimalNumber).doubleValue } }

@@ -59,7 +59,7 @@ final class AppSettings {
 
     /// Nafn til að sýna í fyrirtækjavalmynd.
     var displayName: String {
-        companyName.isEmpty ? (fullName.isEmpty ? "Ónefnt fyrirtæki" : fullName) : companyName
+        companyName.isEmpty ? (fullName.isEmpty ? String(localized: "Ónefnt fyrirtæki") : fullName) : companyName
     }
 
     /// Útfyllir tölvupóst-sniðmátið fyrir tiltekinn reikning ({nafn}, {númer}, {fyrirtæki}).

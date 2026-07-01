@@ -13,7 +13,7 @@ struct PaywallView: View {
         let info = Bundle.main.infoDictionary
         let version = info?["CFBundleShortVersionString"] as? String ?? "—"
         let build = info?["CFBundleVersion"] as? String ?? "—"
-        return "Útgáfa \(version) (\(build))  ·  © 2026 NNV.ehf"
+        return "\(String(localized: "Útgáfa")) \(version) (\(build))  ·  © 2026 NNV.ehf"
     }
 
     private let features: [(icon: String, text: LocalizedStringKey)] = [
@@ -89,7 +89,7 @@ struct PaywallView: View {
         } else {
             #if DEBUG
             if Demo.showPaywall {
-                buySection(showTrial: true, disclosure: "Ókeypis í 1 viku, svo 1.490 kr. á ári. Endurnýjast sjálfkrafa þar til þú segir upp í App Store. Hægt að segja upp hvenær sem er.")
+                buySection(showTrial: true, disclosure: "\(String(localized: "Ókeypis í 1 viku, svo")) 1.490 kr. \(String(localized: "á ári. Endurnýjast sjálfkrafa þar til þú segir upp í App Store. Hægt að segja upp hvenær sem er."))")
             } else {
                 errorSection
             }
@@ -151,10 +151,11 @@ struct PaywallView: View {
 
     private func disclosure(for product: Product, showTrial: Bool) -> String {
         let price = product.displayPrice
+        let perYear = String(localized: "á ári. Endurnýjast sjálfkrafa þar til þú segir upp í App Store. Hægt að segja upp hvenær sem er.")
         if showTrial {
-            return "Ókeypis í 1 viku, svo \(price) á ári. Endurnýjast sjálfkrafa þar til þú segir upp í App Store. Hægt að segja upp hvenær sem er."
+            return "\(String(localized: "Ókeypis í 1 viku, svo")) \(price) \(perYear)"
         }
-        return "\(price) á ári. Endurnýjast sjálfkrafa þar til þú segir upp í App Store. Hægt að segja upp hvenær sem er."
+        return "\(price) \(perYear)"
     }
 
     private func hasFreeTrial(_ product: Product) -> Bool {

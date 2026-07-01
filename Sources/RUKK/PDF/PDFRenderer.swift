@@ -114,7 +114,7 @@ enum PDFRenderer {
             pdfLog.error("Failed to write PDF to \(url, privacy: .public): \(error, privacy: .public)")
             let alert = NSAlert()
             alert.alertStyle = .warning
-            alert.messageText = "Tókst ekki að vista PDF"
+            alert.messageText = String(localized: "Tókst ekki að vista PDF")
             alert.informativeText = error.localizedDescription
             alert.runModal()
         }

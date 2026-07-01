@@ -1,4 +1,4 @@
-import Foundation
+import SwiftUI
 
 enum InvoiceStatus: String, CaseIterable, Codable, Identifiable {
     case draft
@@ -10,7 +10,7 @@ enum InvoiceStatus: String, CaseIterable, Codable, Identifiable {
 
     var id: String { rawValue }
 
-    var label: String {
+    var label: LocalizedStringKey {
         switch self {
         case .draft: "Drög"
         case .sent: "Sent"

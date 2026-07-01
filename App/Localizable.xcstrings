@@ -573,6 +573,50 @@
         }
       }
     },
+    "Drög" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Draft"
+          }
+        }
+      }
+    },
+    "Á eftir" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Overdue"
+          }
+        }
+      }
+    },
+    "Endurgreitt" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Refunded"
+          }
+        }
+      }
+    },
+    "Hætt við" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancelled"
+          }
+        }
+      }
+    },
     "Sala" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -825,6 +869,656 @@
           }
         }
       }
+    },
+    "Númer" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Number" } }
+      }
+    },
+    "úthlutað við útgáfu" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "assigned at issuance" } }
+      }
+    },
+    "Útgáfudagur" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Issue date" } }
+      }
+    },
+    "Gjalddagi" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Due date" } }
+      }
+    },
+    "Eindagi" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Final due date" } }
+      }
+    },
+    "Greitt þann" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Paid on" } }
+      }
+    },
+    "Merkja sem greitt" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Mark as paid" } }
+      }
+    },
+    "Aflæsa númeri" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Unlock number" } }
+      }
+    },
+    "Festa númer" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Lock number" } }
+      }
+    },
+    "Gefa út reikning" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Issue invoice" } }
+      }
+    },
+    "Móttakandi" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Recipient" } }
+      }
+    },
+    "Viðskiptavinur" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Customer" } }
+      }
+    },
+    "Velja" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Select" } }
+      }
+    },
+    "Línur" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Line items" } }
+      }
+    },
+    "Bæta við línu" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Add line" } }
+      }
+    },
+    "Sækja úr dagatali" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Import from Calendar" } }
+      }
+    },
+    "Sækja úr Tyme" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Import from Tyme" } }
+      }
+    },
+    "Leiðréttingar" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Adjustments" } }
+      }
+    },
+    "Afsláttur" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Discount" } }
+      }
+    },
+    "Sjálfgefið VSK% fyrir nýjar línur" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Default VAT % for new lines" } }
+      }
+    },
+    "Innh.máti" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Payment method" } }
+      }
+    },
+    "Mynt" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Currency" } }
+      }
+    },
+    "Athugasemd" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Note" } }
+      }
+    },
+    "Samtölur" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Totals" } }
+      }
+    },
+    "Undirsamtals" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Subtotal" } }
+      }
+    },
+    "VSK" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "VAT" } }
+      }
+    },
+    "Samtals" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Total" } }
+      }
+    },
+    "Búa til kreditreikning" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Create credit note" } }
+      }
+    },
+    "Útgefnum reikningi má ekki breyta (reglug. 505/2013, 15. gr.). Leiðréttu með kreditreikningi — eða aflæstu númerinu hér að ofan til að breyta." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "An issued invoice cannot be changed (reg. 505/2013, art. 15). Correct it with a credit note — or unlock the number above to edit." } }
+      }
+    },
+    "Forskoðun" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Preview" } }
+      }
+    },
+    "Gefðu reikninginn út áður en hann er prentaður" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Issue the invoice before printing it" } }
+      }
+    },
+    "Gefðu reikninginn út áður en hann er sendur" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Issue the invoice before sending it" } }
+      }
+    },
+    "Senda reikning í tölvupósti með PDF" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Send the invoice by email with a PDF" } }
+      }
+    },
+    "Gefðu reikninginn út áður en hann er fluttur út" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Issue the invoice before exporting it" } }
+      }
+    },
+    "Rafrænn reikningur (UBL / TS-136)…" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "E-invoice (UBL / TS-136)…" } }
+      }
+    },
+    "Flytja út" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Export" } }
+      }
+    },
+    "Reikningurinn fær fast raðnúmer" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "The invoice will get the fixed number" } }
+      }
+    },
+    "og verður merktur „Sent“." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "and will be marked \"Sent\"." } }
+      }
+    },
+    "Festir númerið" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Locks in the number" } }
+      }
+    },
+    "og merkir reikninginn „Sent“." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "and marks the invoice \"Sent\"." } }
+      }
+    },
+    "Lýsing" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Description" } }
+      }
+    },
+    "Magn" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Qty" } }
+      }
+    },
+    "Verð" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Price" } }
+      }
+    },
+    "Merki" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Logo" } } }
+    },
+    "Skali" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Scale" } } }
+    },
+    "Auðkenni" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Company details" } } }
+    },
+    "Fullt nafn" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Full name" } } }
+    },
+    "Kennitala" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "National ID" } } }
+    },
+    "VSK-númer" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "VAT number" } } }
+    },
+    "Bankareikningur (Reikningsnr.)" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Bank account (account no.)" } } }
+    },
+    "Innh.máti (sjálfgefið)" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Payment method (default)" } } }
+    },
+    "Hafa samband" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Contact" } } }
+    },
+    "Netfang" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Email" } } }
+    },
+    "Sími" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Phone" } } }
+    },
+    "Vefsíða" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Website" } } }
+    },
+    "Heimilisfang" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Address" } } }
+    },
+    "Velja mynd…" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Choose Image…" } } }
+    },
+    "Fjarlægja" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Remove" } } }
+    },
+    "PNG, JPEG eða SVG. Birtist efst á hverjum reikningi." : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "PNG, JPEG, or SVG. Appears at the top of every invoice." } } }
+    },
+    "Tókst ekki að lesa myndina" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Couldn't read the image" } } }
+    },
+    "Sjálfgildi" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Defaults" } } }
+    },
+    "Myntkóði" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Currency code" } } }
+    },
+    "Virðisaukaskattur %" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "VAT %" } } }
+    },
+    "Greiðslufrestur (dagar)" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Payment term (days)" } } }
+    },
+    "Eindagi — dagar eftir gjalddaga" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Final due date — days after due date" } } }
+    },
+    "Dagsetningarsnið" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Date format" } } }
+    },
+    "Stutt" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Short" } } }
+    },
+    "Miðlungs" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Medium" } } }
+    },
+    "Langt" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Long" } } }
+    },
+    "Númerakerfi" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Numbering" } } }
+    },
+    "Forskeyti" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Prefix" } } }
+    },
+    "Næsta númer" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Next number" } } }
+    },
+    "Sjálfgefin athugasemd" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Default note" } } }
+    },
+    "Tölvupóstur til viðskiptavinar" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Email to customer" } } }
+    },
+    "Sjálfvirkt útfyllt: {nafn} = nafn viðskiptavinar · {númer} = reikningsnúmer · {fyrirtæki} = nafn fyrirtækis." : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Auto-filled: {nafn} = customer name · {númer} = invoice number · {fyrirtæki} = company name." } } }
+    },
+    "Efni" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Subject" } } }
+    },
+    "Leturgerð" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Typeface" } } }
+    },
+    "Letur" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Font" } } }
+    },
+    "Kerfisletur" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "System Font" } } }
+    },
+    "Grunnstærð" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Base size" } } }
+    },
+    "Fyrirsögn / logo-texti" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Heading / logo text" } } }
+    },
+    "Litur texta" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Text color" } } }
+    },
+    "Blaðsíða" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Page" } } }
+    },
+    "Pappírsstærð" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Paper size" } } }
+    },
+    "Sérsniðnar stöður" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Custom statuses" } } }
+    },
+    "Bæta við" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Add" } } }
+    },
+    "Innbyggðar stöður (Drög, Sent, Greitt, Á eftir, Endurgreitt, Hætt við) eru alltaf í boði. Sérsniðnar stöður birtast við hlið þeirra í reikningsvalmyndinni." : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "The built-in statuses (Draft, Sent, Paid, Overdue, Refunded, Cancelled) are always available. Custom statuses appear alongside them in the invoice status menu." } } }
+    },
+    "Nafn" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Name" } } }
+    },
+    "Tókst ekki að vista PDF" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Couldn't save the PDF" } } }
+    },
+    "Tókst ekki að vista XML" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Couldn't save the XML" } } }
+    },
+    "Útflutningur tókst" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Export succeeded" } } }
+    },
+    "Útflutningi lokið með villum" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Export finished with errors" } } }
+    },
+    "Skrifaðar skrár:" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Files written:" } } }
+    },
+    "Mistókust:" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Failed:" } } }
+    },
+    "Opna möppu" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Open Folder" } } }
+    },
+    "Í lagi" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "OK" } } }
+    },
+    "Veldu möppu fyrir reikningsskrár" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Choose a folder for the invoice files" } } }
+    },
+    "reikningar" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "invoices" } } }
+    },
+    "dagar" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "days" } } }
+    },
+    "Engir reikningar enn" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "No invoices yet" } } }
+    },
+    "(ekkert nr.)" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "(no number)" } } }
+    },
+    "Athugasemdir" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Notes" } } }
+    },
+    "Nýr reikningur fyrir" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "New invoice for" } } }
+    },
+    "þennan viðskiptavin" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "this customer" } } }
+    },
+    "klst" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "hrs" } } }
+    },
+    "Bæta" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Add" } } }
+    },
+    "við reikning" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "to invoice" } } }
+    },
+    "Sækja tíma úr dagatali" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Import time from Calendar" } } }
+    },
+    "Frá" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "From" } } }
+    },
+    "Til" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "To" } } }
+    },
+    "Taxti (kr/klst)" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Rate (ISK/hr)" } } }
+    },
+    "Sækja atburði" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Fetch Events" } } }
+    },
+    "Engir atburðir" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "No Events" } } }
+    },
+    "Veldu tímabil og ýttu á „Sækja atburði“." : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Choose a date range and tap “Fetch Events”." } } }
+    },
+    "RUKK hefur ekki aðgang að Dagatali." : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "RUKK doesn't have access to Calendar." } } }
+    },
+    "Veittu aðgang að Dagatali til að sækja unninn tíma." : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Grant access to Calendar to import worked time." } } }
+    },
+    "Opna kerfisstillingar" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Open System Settings" } } }
+    },
+    "Veita aðgang" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Grant Access" } } }
+    },
+    "Hætta við" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Cancel" } } }
+    },
+    "Sækja tíma úr Tyme" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Import time from Tyme" } } }
+    },
+    "Velja Tyme-skrá…" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Choose Tyme File…" } } }
+    },
+    "Aðeins órukkað" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Unbilled only" } } }
+    },
+    "Engin Tyme-skrá" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "No Tyme File" } } }
+    },
+    "Flyttu út tímafærslur úr Tyme sem JSON og veldu skrána hér." : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Export time entries from Tyme as JSON and choose the file here." } } }
+    },
+    "Engar færslur" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "No Entries" } } }
+    },
+    "Engar órukkaðar færslur í skránni." : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "No unbilled entries in the file." } } }
+    },
+    "Afvelja allt" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Deselect All" } } }
+    },
+    "Velja allt" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Select All" } } }
+    },
+    "Engar tímafærslur fundust í skránni." : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "No time entries found in the file." } } }
+    },
+    "Gat ekki lesið skrána:" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Couldn't read the file:" } } }
+    },
+    "Útgáfa" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Version" } } }
+    },
+    "Ókeypis í 1 viku, svo" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Free for 1 week, then" } } }
+    },
+    "á ári. Endurnýjast sjálfkrafa þar til þú segir upp í App Store. Hægt að segja upp hvenær sem er." : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "per year. Renews automatically until cancelled in the App Store. Cancel anytime." } } }
+    },
+    "Ónefnt fyrirtæki" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Unnamed company" } } }
+    },
+    "Færa upp" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Move Up" } } }
+    },
+    "Færa niður" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Move Down" } } }
+    },
+    "Senda í tölvupósti" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Send by Email" } } }
+    },
+    "Stærð" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Size" } } }
+    },
+    "Ár" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Year" } } }
+    },
+    "Upphæð" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Amount" } } }
+    },
+    "Atburður" : {
+      "extractionState" : "manual",
+      "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Event" } } }
     }
   },
   "version" : "1.0"

@@ -51,7 +51,7 @@ enum CalendarImporter {
             .sorted { ($0.startDate ?? .distantPast) < ($1.startDate ?? .distantPast) }
             .map { ev in
                 BillableEvent(id: ev.eventIdentifier ?? UUID().uuidString,
-                              title: (ev.title?.isEmpty == false) ? ev.title! : "Atburður",
+                              title: (ev.title?.isEmpty == false) ? ev.title! : String(localized: "Atburður"),
                               calendarName: ev.calendar?.title ?? "",
                               start: ev.startDate ?? .now,
                               end: ev.endDate ?? ev.startDate ?? .now)

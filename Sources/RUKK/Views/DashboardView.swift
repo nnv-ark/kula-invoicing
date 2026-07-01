@@ -82,7 +82,7 @@ struct DashboardView: View {
 
     private var salesChart: some View {
         Chart(monthly, id: \.key) { item in
-            BarMark(x: .value("Mánuður", item.label), y: .value("Sala", item.totalDouble))
+            BarMark(x: .value(String(localized: "Mánuður"), item.label), y: .value(String(localized: "Sala"), item.totalDouble))
                 .foregroundStyle(.tint)
         }
         .chartYAxis {
@@ -159,7 +159,7 @@ struct DashboardView: View {
     private var avgPaymentText: String {
         let days = period.compactMap(\.paymentDays)
         guard !days.isEmpty else { return "—" }
-        return "\(Int((Double(days.reduce(0, +)) / Double(days.count)).rounded())) dagar"
+        return "\(Int((Double(days.reduce(0, +)) / Double(days.count)).rounded())) \(String(localized: "dagar"))"
     }
 
     private var unpaid: [Invoice] {
@@ -173,7 +173,7 @@ struct DashboardView: View {
     private var monthly: [MonthTotal] {
         let cal = Calendar.current
         let fmt = DateFormatter()
-        fmt.locale = Locale(identifier: "is_IS")
+        fmt.locale = AppLanguage.currentUI.locale
         fmt.dateFormat = "MMM"
         let grouped = Dictionary(grouping: period) { inv -> Date in
             let comps = cal.dateComponents([.year, .month], from: inv.issueDate)

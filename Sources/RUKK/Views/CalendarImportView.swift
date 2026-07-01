@@ -108,7 +108,7 @@ struct CalendarImportView: View {
             Button("Hætta við") { dismiss() }
             Spacer()
             Text(totalLabel).font(.caption).foregroundStyle(.secondary)
-            Button("Bæta \(selected.count) við reikning") { addSelected(); dismiss() }
+            Button(addButtonTitle) { addSelected(); dismiss() }
                 .buttonStyle(.borderedProminent)
                 .disabled(selected.isEmpty)
         }
@@ -164,14 +164,19 @@ struct CalendarImportView: View {
 
     private func subtitle(_ ev: BillableEvent) -> String {
         let date = ev.start.formatted(date: .abbreviated, time: .shortened)
-        var s = "\(date)  ·  \(hoursString(ev.hours)) klst"
+        var s = "\(date)  ·  \(hoursString(ev.hours)) \(String(localized: "klst"))"
         if !ev.calendarName.isEmpty { s += "  ·  \(ev.calendarName)" }
         return s
     }
 
     private var totalLabel: String {
         let total = events.filter { selected.contains($0.id) }.reduce(Decimal(0)) { $0 + $1.hours }
-        return selected.isEmpty ? "" : "Samtals \(hoursString(total)) klst"
+        guard !selected.isEmpty else { return "" }
+        return "\(String(localized: "Samtals")) \(hoursString(total)) \(String(localized: "klst"))"
+    }
+
+    private var addButtonTitle: String {
+        "\(String(localized: "Bæta")) \(selected.count) \(String(localized: "við reikning"))"
     }
 
     private func hoursString(_ h: Decimal) -> String {

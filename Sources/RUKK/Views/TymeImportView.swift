@@ -102,7 +102,7 @@ struct TymeImportView: View {
             }
             Spacer()
             Text(totalLabel).font(.caption).foregroundStyle(.secondary)
-            Button("Bæta \(selected.count) við reikning") { addSelected(); dismiss() }
+            Button(addButtonTitle) { addSelected(); dismiss() }
                 .buttonStyle(.borderedProminent)
                 .disabled(selected.isEmpty)
         }
@@ -120,7 +120,7 @@ struct TymeImportView: View {
             let data = try Data(contentsOf: url)
             let parsed = TymeImporter.parse(data)
             guard !parsed.isEmpty else {
-                error = "Engar tímafærslur fundust í skránni."
+                error = String(localized: "Engar tímafærslur fundust í skránni.")
                 entries = []; selected = []; fileName = url.lastPathComponent
                 return
             }
@@ -128,7 +128,7 @@ struct TymeImportView: View {
             fileName = url.lastPathComponent
             selected = Set(parsed.filter(\.isUnbilled).map(\.id))
         } catch {
-            self.error = "Gat ekki lesið skrána: \(error.localizedDescription)"
+            self.error = "\(String(localized: "Gat ekki lesið skrána:")) \(error.localizedDescription)"
         }
     }
 
@@ -178,8 +178,9 @@ struct TymeImportView: View {
         if let start = e.start {
             parts.append(start.formatted(date: .abbreviated, time: .omitted))
         }
-        parts.append("\(hoursString(e.hours)) klst")
-        parts.append("\(amountString(e.rate))/klst")
+        let klst = String(localized: "klst")
+        parts.append("\(hoursString(e.hours)) \(klst)")
+        parts.append("\(amountString(e.rate))/\(klst)")
         if !e.project.isEmpty { parts.append(e.project) }
         if !e.isUnbilled { parts.append(e.billing.capitalized) }
         return parts.joined(separator: "  ·  ")
@@ -190,7 +191,11 @@ struct TymeImportView: View {
         let chosen = entries.filter { selected.contains($0.id) }
         let hours = chosen.reduce(Decimal(0)) { $0 + $1.hours }
         let amount = chosen.reduce(Decimal(0)) { $0 + $1.hours * $1.rate }
-        return "Samtals \(hoursString(hours)) klst  ·  \(amountString(amount))"
+        return "\(String(localized: "Samtals")) \(hoursString(hours)) \(String(localized: "klst"))  ·  \(amountString(amount))"
+    }
+
+    private var addButtonTitle: String {
+        "\(String(localized: "Bæta")) \(selected.count) \(String(localized: "við reikning"))"
     }
 
     private func hoursString(_ h: Decimal) -> String {

@@ -74,7 +74,7 @@ enum UBLInvoiceExporter {
             ublLog.error("Failed to write UBL XML to \(url, privacy: .public): \(error, privacy: .public)")
             let alert = NSAlert()
             alert.alertStyle = .warning
-            alert.messageText = "Tókst ekki að vista XML"
+            alert.messageText = String(localized: "Tókst ekki að vista XML")
             alert.informativeText = error.localizedDescription
             alert.runModal()
         }

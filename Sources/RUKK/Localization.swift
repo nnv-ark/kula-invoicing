@@ -20,6 +20,12 @@ enum AppLanguage: String, CaseIterable, Identifiable, Codable, Sendable {
 
     /// Öruggt uppflettinafn — fellur á íslensku ef gildið er óþekkt.
     static func from(_ raw: String) -> AppLanguage { AppLanguage(rawValue: raw) ?? .icelandic }
+
+    /// Núverandi viðmótsmál lesið beint úr UserDefaults — til nota utan SwiftUI-view
+    /// samhengis (t.d. DateFormatter/NumberFormatter fyrir mælaborð og lista).
+    static var currentUI: AppLanguage {
+        from(UserDefaults.standard.string(forKey: "uiLanguage") ?? AppLanguage.icelandic.rawValue)
+    }
 }
 
 /// Textar reikningsins á völdu tungumáli. Sjálfstætt frá viðmótsmáli og

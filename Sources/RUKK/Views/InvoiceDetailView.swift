@@ -45,6 +45,16 @@ struct InvoiceDetailView: View {
         Invoice.formattedNumber(prefix: settings.invoiceNumberPrefix, settings.nextInvoiceNumber)
     }
 
+    /// Byggð úr staka-orða brotum (ekki bein interpolation í Text) svo hún þýðist rétt —
+    /// LocalizedStringKey-interpolation krefst nákvæms sniðs sem er of áhættusamt að handskrifa.
+    private var issueFooterText: String {
+        if invoice.number.isEmpty {
+            return "\(String(localized: "Reikningurinn fær fast raðnúmer")) \(nextNumberPreview) \(String(localized: "og verður merktur „Sent“."))"
+        } else {
+            return "\(String(localized: "Festir númerið")) \(invoice.number) \(String(localized: "og merkir reikninginn „Sent“."))"
+        }
+    }
+
     var body: some View {
         HSplitView {
             form
@@ -173,9 +183,7 @@ struct InvoiceDetailView: View {
                     .buttonStyle(.borderedProminent)
                     .controlSize(.large)
                 } footer: {
-                    Text(invoice.number.isEmpty
-                         ? "Reikningurinn fær fast raðnúmer \(nextNumberPreview) og verður merktur „Sent“."
-                         : "Festir númerið \(invoice.number) og merkir reikninginn „Sent“.")
+                    Text(issueFooterText)
                 }
             }
 

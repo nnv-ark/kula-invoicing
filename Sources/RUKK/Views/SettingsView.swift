@@ -225,7 +225,7 @@ private struct LogoPicker: View {
             settingsLog.error("Failed to load logo from \(url, privacy: .public): \(error, privacy: .public)")
             let alert = NSAlert()
             alert.alertStyle = .warning
-            alert.messageText = "Tókst ekki að lesa myndina"
+            alert.messageText = String(localized: "Tókst ekki að lesa myndina")
             alert.informativeText = error.localizedDescription
             alert.runModal()
         }
@@ -300,7 +300,7 @@ private struct AppearanceTab: View {
             Section("Leturgerð") {
                 Picker("Letur", selection: $settings.fontName) {
                     ForEach(families, id: \.self) { fam in
-                        Text(fam.isEmpty ? "Kerfisletur" : fam).tag(fam)
+                        Text(fam.isEmpty ? String(localized: "Kerfisletur") : fam).tag(fam)
                     }
                 }
                 Stepper(value: $settings.baseFontSize, in: 7...16, step: 0.5) {
