@@ -11,6 +11,7 @@ let package = Package(
         // RUKKApp.swift carries the @main entry point used only by the Xcode app
         // target; excluding it here keeps the SwiftPM library linkable into tests.
         .target(name: "RUKK", exclude: ["RUKKApp.swift"]),
-        .testTarget(name: "RUKKTests", dependencies: ["RUKK"])
+        .testTarget(name: "RUKKTests", dependencies: ["RUKK"],
+                    resources: [.copy("Fixtures")])
     ]
 )

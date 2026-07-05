@@ -1,5 +1,6 @@
 import SwiftUI
 import SwiftData
+import UniformTypeIdentifiers
 
 enum SidebarItem: Hashable {
     case dashboard
@@ -16,6 +17,20 @@ struct ContentView: View {
     @State private var selection: SidebarItem? = .dashboard
     @State private var selectedInvoice: Invoice?
     @State private var selectedContact: Contact?
+
+    // Innflutningur viðskiptavina (xlsx / CSV / XML) — í ContentView svo ⌘I virki alltaf.
+    @State private var showingCustomerImporter = false
+    @State private var customerImportRecords: [CustomerRecord] = []
+    @State private var customerImportFileName = ""
+    @State private var showingCustomerReview = false
+    @State private var customerImportError: String?
+
+    private var customerImportTypes: [UTType] {
+        var types: [UTType] = [.commaSeparatedText, .xml]
+        if let xlsx = UTType(filenameExtension: "xlsx") { types.append(xlsx) }
+        if let tsv = UTType(filenameExtension: "tsv") { types.append(tsv) }
+        return types
+    }
 
     var body: some View {
         NavigationSplitView {
@@ -47,7 +62,7 @@ struct ContentView: View {
                     InvoiceListView(company: company, selection: $selectedInvoice)
                         .id(company.id)               // ný fyrirspurn þegar skipt er um fyrirtæki
                 case .contacts:
-                    ContactsView(company: company, selection: $selectedContact)
+                    ContactsView(company: company, selection: $selectedContact, onImport: beginCustomerImport)
                         .id(company.id)
                 }
             } else {
@@ -108,6 +123,45 @@ struct ContentView: View {
             if let payload = inbox.pending { importInvoice(payload) }
         }
         .focusedSceneValue(\.newInvoice, createInvoice)
+        .focusedSceneValue(\.importCustomers, beginCustomerImport)
+        .fileImporter(isPresented: $showingCustomerImporter,
+                      allowedContentTypes: customerImportTypes,
+                      allowsMultipleSelection: false) { result in
+            handleCustomerImport(result)
+        }
+        .sheet(isPresented: $showingCustomerReview) {
+            if let company = activeCompany {
+                CustomerImportView(records: customerImportRecords, company: company, fileName: customerImportFileName)
+            }
+        }
+        .alert("Innflutningur mistókst",
+               isPresented: Binding(get: { customerImportError != nil },
+                                    set: { if !$0 { customerImportError = nil } }),
+               presenting: customerImportError) { _ in
+            Button("Í lagi", role: .cancel) { customerImportError = nil }
+        } message: { Text($0) }
+    }
+
+    /// Opnar skráaval fyrir innflutning viðskiptavina (fer fyrst á Viðskiptavinir-flipann).
+    private func beginCustomerImport() {
+        selection = .contacts
+        showingCustomerImporter = true
+    }
+
+    /// Les valda skrá, býr til færslur og opnar yfirferð. Villur birtast í `alert`.
+    private func handleCustomerImport(_ result: Result<[URL], Error>) {
+        customerImportError = nil
+        do {
+            guard let url = try result.get().first else { return }
+            let needsStop = url.startAccessingSecurityScopedResource()
+            defer { if needsStop { url.stopAccessingSecurityScopedResource() } }
+            let records = try CustomerImport.records(from: url)
+            customerImportRecords = records
+            customerImportFileName = url.lastPathComponent
+            showingCustomerReview = true
+        } catch {
+            customerImportError = error.localizedDescription
+        }
     }
 
     /// Eldri gögn án fyrirtæris eru færð á virkt fyrirtæki svo þau hverfi ekki.

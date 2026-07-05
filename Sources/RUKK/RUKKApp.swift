@@ -130,6 +130,7 @@ struct RUKKCommands: Commands {
     @FocusedValue(\.printInvoice) private var printInvoice
     @FocusedValue(\.exportPDF) private var exportPDF
     @FocusedValue(\.exportXML) private var exportXML
+    @FocusedValue(\.importCustomers) private var importCustomers
 
     var body: some Commands {
         CommandGroup(replacing: .newItem) {
@@ -138,6 +139,10 @@ struct RUKKCommands: Commands {
                 .disabled(newInvoice == nil)
         }
         CommandGroup(replacing: .importExport) {
+            Button("Flytja inn viðskiptavini…") { importCustomers?() }
+                .keyboardShortcut("i", modifiers: .command)
+                .disabled(importCustomers == nil)
+            Divider()
             Button("Flytja út PDF…") { exportPDF?() }
                 .keyboardShortcut("e", modifiers: .command)
                 .disabled(exportPDF == nil)

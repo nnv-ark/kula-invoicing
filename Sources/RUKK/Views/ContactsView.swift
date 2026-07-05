@@ -8,9 +8,13 @@ struct ContactsView: View {
     @State private var searchText = ""
 
     private let company: AppSettings
+    /// Ræst þegar notandi vill flytja inn viðskiptavini (eignarhald á ferlinu er í ContentView
+    /// svo ⌘I-valmyndaskipunin virki óháð völdum flipa).
+    private let onImport: () -> Void
 
-    init(company: AppSettings, selection: Binding<Contact?>) {
+    init(company: AppSettings, selection: Binding<Contact?>, onImport: @escaping () -> Void = {}) {
         self.company = company
+        self.onImport = onImport
         _selection = selection
         let cid = company.id
         _contacts = Query(filter: #Predicate<Contact> { $0.owner?.id == cid }, sort: \Contact.name)
@@ -77,6 +81,13 @@ struct ContactsView: View {
                     .fixedSize()
                     .help("Nýr viðskiptavinur")
                     Spacer()
+                    Button { onImport() } label: {
+                        Label("Flytja inn…", systemImage: "square.and.arrow.down")
+                            .lineLimit(1)
+                    }
+                    .buttonStyle(.borderless)
+                    .fixedSize()
+                    .help("Flytja inn viðskiptavini úr Excel (.xlsx), CSV eða XML")
                 }
                 .padding(.horizontal, 12)
                 .padding(.top, 7)

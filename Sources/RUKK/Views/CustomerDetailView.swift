@@ -53,13 +53,25 @@ struct CustomerDetailView: View {
                 TextField("Nafn", text: $contact.name)
                 TextField("Fyrirtæki", text: $contact.company)
                 TextField("Kennitala", text: $contact.nationalID)
+                TextField("Tengiliður", text: $contact.contactPerson)
                 TextField("Netfang", text: $contact.email)
                 TextField("Sími", text: $contact.phone)
                 TextField("Heimilisfang", text: $contact.address, axis: .vertical)
                     .lineLimit(2...5)
+                HStack {
+                    TextField("Póstnúmer", text: $contact.postalCode)
+                        .frame(width: 90)
+                    TextField("Staður", text: $contact.city)
+                }
+                TextField("Land", text: $contact.country)
+                Toggle("Senda rafræna reikninga", isOn: $contact.sendElectronicInvoices)
             }
 
             Section("Athugasemdir") {
+                TextField("Sjálfgefin athugasemd á reikningum", text: $contact.defaultInvoiceNote, axis: .vertical)
+                    .lineLimit(1...3)
+                TextField("Aukaupplýsingar", text: $contact.extraInfo, axis: .vertical)
+                    .lineLimit(1...3)
                 TextEditor(text: $contact.notes)
                     .frame(minHeight: 90)
             }
